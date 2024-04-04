@@ -1,5 +1,6 @@
 .screen-view-container {
   position: relative;
+  height: 100vh;
   button {
     position: absolute;
     background: transparent;
@@ -16,5 +17,16 @@
     height: 10em;
     border: solid 1px #715493;
     text-align: center;
+  }
+  .important-info-container {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 5em;
+    border: solid 1px #715493;
+    bottom: 0;
+    text-align: center;
+    padding-top: 1em;
   }
 }

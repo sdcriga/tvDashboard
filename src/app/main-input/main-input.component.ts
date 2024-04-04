@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Main } from 'src/_interface/main';
+import { Main } from 'src/app/_interface/main';
+import { SharedService } from '../_service/shared.service';
 
 @Component({
   selector: 'app-main-input',
@@ -10,7 +11,10 @@ import { Main } from 'src/_interface/main';
 export class MainInputComponent {
   dataObject: Main;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private sharedService: SharedService
+  ) {}
 
   mainInputForm = this.formBuilder.group({
     title: [''],
