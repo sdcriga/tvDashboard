@@ -1,8 +1,18 @@
 <app-navbar></app-navbar>
 <div>
   <div class="important-wrap">
-    <form action="/upload" method="post" enctype="multipart/form-data">
-      <input type="text" placeholder="Description" />
+    <form
+      action="/upload"
+      method="post"
+      enctype="multipart/form-data"
+      [formGroup]="importantInputForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <input
+        type="text"
+        placeholder="Description"
+        formControlName="description"
+      />
       <button type="submit">Add</button>
     </form>
   </div>

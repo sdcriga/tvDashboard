@@ -1,3 +1,3 @@
 export interface Important {
-  description: string;
+  description: string | null;
 }

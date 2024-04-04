@@ -1,6 +1,6 @@
 export interface Main {
-  title: string;
-  when: string;
-  description: string;
-  file: File;
+  title: string | null;
+  when: string | null;
+  description: string | null;
+  file: File | null;
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Main } from 'src/_interface/main';
 
 @Component({
@@ -8,8 +8,7 @@ import { Main } from 'src/_interface/main';
   styleUrls: ['./main-input.component.scss'],
 })
 export class MainInputComponent {
-  dataObejct: Main;
-  when: String = '';
+  dataObject: Main;
 
   constructor(private formBuilder: FormBuilder) {}
 
@@ -19,33 +18,10 @@ export class MainInputComponent {
     description: [''],
   });
 
-  // mainInputForm = this.formBuilder.group({
-  //   main: [
-  //     {
-  //       title: [''],
-  //       when: [''],
-  //       description: [''],
-  //     },
-  //   ],
-  // });
-
-  // mainObject = new FormGroup({
-  //   name: new FormControl(''),
-  //   main: new FormArray([
-  //     new FormGroup({
-  //       title: new FormControl(''),
-  //       when: new FormControl(''),
-  //       description: new FormControl(''),
-  //     }),
-  //   ]),
-  // });
-
-  // onSubmit() {
-  //   return (<FormArray>this.mainObject.get('main')).controls;
-  // }
-
   onSubmit(): void {
+    this.dataObject = this.mainInputForm.value as Main;
     const formDataJson = JSON.stringify(this.mainInputForm.value);
+    console.log(this.dataObject.description + 'data object');
     console.log(formDataJson + 'json');
   }
 }
