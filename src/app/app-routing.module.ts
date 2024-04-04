@@ -1,10 +1,34 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MainInputComponent } from './main-input/main-input.component';
+import { EventInputComponent } from './event-input/event-input.component';
+import { ImportantInputComponent } from './important-input/important-input.component';
+import { ScreenViewComponent } from './screen-view/screen-view.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: 'screen',
+    component: ScreenViewComponent,
+  },
+  {
+    path: 'main',
+    component: MainInputComponent,
+  },
+  {
+    path: 'event',
+    component: EventInputComponent,
+  },
+  {
+    path: 'important',
+    component: ImportantInputComponent,
+  },
+  { path: '', component: ScreenViewComponent },
+  { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: '**', component: ScreenViewComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

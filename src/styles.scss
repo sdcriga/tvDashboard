@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+*,
+body {
+  margin: 0;
+  // height: 100vh;
+  // padding: 0;
+  // box-sizing: border-box;
+}
+
+// html,
+// body {
+//    height: 100%;
+// }
+
+:root {
+  --background-color: #ffff;
+  --main-color: #f95738;
+  --font-title-size: 36px;
+  --font-text-size: 16px;
+  --font-dark: #464555;
+  --font-gray: #adadad;
+}

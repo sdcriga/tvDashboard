@@ -1,0 +1,13 @@
+.important-wrap {
+  display: flex;
+  justify-content: center;
+  form {
+    input {
+      margin: 1em;
+      padding: 0.3em;
+    }
+    button {
+      padding: 0.3em 1em;
+    }
+  }
+}
