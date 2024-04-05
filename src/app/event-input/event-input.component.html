@@ -1,13 +1,7 @@
 <app-navbar></app-navbar>
 <div>
   <div class="event-wrap">
-    <form
-      action="/upload"
-      method="post"
-      enctype="multipart/form-data"
-      (ngSubmit)="onSubmit()"
-      [formGroup]="eventInputForm"
-    >
+    <form (ngSubmit)="onSubmit()" [formGroup]="eventInputForm">
       <input type="text" placeholder="Title" formControlName="title" />
       <input type="text" placeholder="When" formControlName="when" />
       <input
@@ -21,10 +15,13 @@
         name="file"
         formControlName="file"
         #filePicker
-        (change)="onFileSelect($event)"
       />
       <input type="submit" value="Add" />
     </form>
   </div>
   <a href="/">Main screen</a>
 </div>
+<!-- (change)="onFileSelect($event)" -->
+<!-- action="/upload"
+method="post"
+enctype="multipart/form-data" -->

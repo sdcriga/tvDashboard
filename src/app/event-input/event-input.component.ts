@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+import { SharedService } from '../_service/shared.service';
+import { Events } from '../_interface/events';
 
 @Component({
   selector: 'app-event-input',
@@ -7,42 +9,40 @@ import { FormBuilder, FormControl } from '@angular/forms';
   styleUrls: ['./event-input.component.scss'],
 })
 export class EventInputComponent {
+  dataObject: Events | null = null;
   selectedFile: File;
   msg: string = '';
   image: any;
   file: File | null = null;
+  submittedForms: any[] = [];
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private sharedService: SharedService
+  ) {}
 
   eventInputForm = this.formBuilder.group({
-    title: new FormControl(''),
-    when: new FormControl(''),
-    description: new FormControl(''),
-    file: new FormControl(''),
+    title: [''],
+    when: [''],
+    description: [''],
+    // file: [''],
   });
 
   onSubmit(): void {
+    this.dataObject = this.eventInputForm.value as Events;
     console.log(this.eventInputForm.value + 'test test');
     const formDataJson = JSON.stringify(this.eventInputForm.value);
     console.log(formDataJson, 'json');
+    this.submittedForms.push(this.dataObject);
+    this.sharedService.updateEventStorageData(this.dataObject);
+    this.eventInputForm.reset();
   }
 
-  onFileSelect(event: any) {
-    if (this.file) {
-      const formData = new FormData();
-
-      formData.append('file', this.file, this.file.name);
-
-      console.log(this.file + 'hgvdfhvshj');
-
-      //const upload$ = this.http.post("https://httpbin.org/post", formData);
-    }
-    // this.selectedFile = event.target.files[0];
-    // this.eventInputForm.patchValue({ file: this.selectedFile });
-    // console.log(this.selectedFile, 'selected file');
-    // // this.selectedFile = event.target.files[0];
-    // console.log(this.selectedFile + 'selected file');
-    // const file = (event.target as HTMLInputElement).files[0];
-    // this.eventInputForm.patchValue({ file: file });
-  }
+  // onFileSelect(event: any) {
+  //   if (this.file) {
+  //     const formData = new FormData();
+  //     formData.append('file', this.file, this.file.name);
+  //     console.log(this.file + 'this is file');
+  //   }
+  // }
 }

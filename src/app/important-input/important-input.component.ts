@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Important } from 'src/app/_interface/important';
+import { Important } from '../_interface/important';
 import { SharedService } from '../_service/shared.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class ImportantInputComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.dataObject = this.sharedService.getData();
+    this.dataObject = this.sharedService.getImportantSectionData();
   }
 
   importantInputForm = this.formBuilder.group({
@@ -29,6 +29,6 @@ export class ImportantInputComponent implements OnInit {
     const formDataJson = JSON.stringify(this.importantInputForm.value);
     console.log(this.dataObject.description + 'data object');
     console.log(formDataJson + 'json');
-    this.sharedService.updateStorageData(this.dataObject);
+    this.sharedService.updateImportantStorageData(this.dataObject);
   }
 }

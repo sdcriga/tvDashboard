@@ -3,7 +3,21 @@
   <div class="calendar">
     <p>im calendar</p>
   </div>
+  <div class="main-info-container">
+    <h2>{{ mainSectionObject.title }}</h2>
+    <p>{{ mainSectionObject.when }}</p>
+    <p>{{ mainSectionObject.description }}</p>
+  </div>
+  <div class="event-info-container">
+    <div *ngFor="let event of eventSectionObject" class="event-list-container">
+      <div class="event-title-wrap">
+        <h3>{{ event.title }}</h3>
+        <p>{{ event.when }}</p>
+      </div>
+      <p>{{ event.description }}</p>
+    </div>
+  </div>
   <div class="important-info-container">
-    <p>{{ dataObject.description }}</p>
+    <p>{{ importantSectionObject.description }}</p>
   </div>
 </div>
