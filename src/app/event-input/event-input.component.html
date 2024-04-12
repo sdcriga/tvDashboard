@@ -1,9 +1,9 @@
 <app-navbar></app-navbar>
-<div>
+<div class="event-container">
   <div class="event-wrap">
     <form (ngSubmit)="onSubmit()" [formGroup]="eventInputForm">
       <input type="text" placeholder="Title" formControlName="title" />
-      <input type="text" placeholder="When" formControlName="when" />
+      <input type="date" placeholder="Date" formControlName="date" />
       <input
         type="text"
         placeholder="Description"
@@ -19,8 +19,24 @@
       <input type="submit" value="Add" />
     </form>
   </div>
+  <div class="event-info-wrap">
+    <h1>Current Events</h1>
+    <div class="event-list">
+      <p>Title</p>
+      <p>
+        Lorem ipsum dolor sit amet <br />
+        consectetur adipisicing elit. <br />
+        Neque, cupiditate!
+      </p>
+      <button>Delete</button>
+      <button>Copy</button>
+    </div>
+  </div>
+</div>
+<div class="test-a">
   <a href="/">Main screen</a>
 </div>
+
 <!-- (change)="onFileSelect($event)" -->
 <!-- action="/upload"
 method="post"

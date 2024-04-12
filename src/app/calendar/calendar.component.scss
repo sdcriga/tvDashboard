@@ -1,0 +1,57 @@
+.calendar-component {
+  .current-date-wrap {
+    display: flex;
+    padding-bottom: 1em;
+    text-align: left;
+    justify-content: space-between;
+  }
+  p:nth-child(2) {
+    color: red;
+  }
+  .days,
+  .dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+  }
+  ul.days > li,
+  li.date {
+    /* Apply consistent styling to both */
+    padding: 0.3em 0.5em;
+    justify-self: center;
+    align-self: center;
+    height: 3em; /* Set a fixed height */
+  }
+  ul.days > li {
+    color: #c0c0c0;
+  }
+  li.date {
+    color: #383838;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    text-align: center;
+  }
+}
+
+.current-date {
+  color: red !important;
+}
+
+//   li {
+//     display: inline-block;
+//     border: 1px solid #ccc;
+//     // width: 1em;
+//     // width: calc(100% / 7 - 2px);
+//     // height: calc(100% / 5 - 2px);
+
+// li.grey {
+//   color: #ccc;
+// }
+//   li:hover {
+//     background-color: #ccc;
+//   }
+// }

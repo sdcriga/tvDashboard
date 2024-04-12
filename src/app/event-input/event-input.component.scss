@@ -1,16 +1,40 @@
-.event-wrap {
+.event-container {
   display: flex;
-  justify-content: center;
-  form {
+  justify-content: space-evenly;
+  .event-wrap {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-    gap: 1em;
-    input {
-      width: 12em;
-      padding: 0.5em;
-      border: 1px solid #56423d;
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 1em;
+      input {
+        width: 12em;
+        padding: 0.5em;
+        border: 1px solid #56423d;
+      }
     }
   }
+  .event-info-wrap {
+    h1 {
+      font-size: 20px;
+    }
+    .event-list {
+      margin-top: 1em;
+      p {
+        font-size: 13px;
+      }
+      button {
+        margin-top: 0.5em;
+        margin-right: 0.5em;
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+.test-a {
+  padding-top: 10em;
 }

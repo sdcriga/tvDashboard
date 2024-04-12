@@ -1,0 +1,25 @@
+<div class="calendar-component">
+  <div class="current-date-wrap">
+    <!-- <button (click)="setMonth(-1)">&lt;</button> -->
+    <p>{{ date | date : "MMMM yyyy" }}</p>
+    <p>TODAY</p>
+
+    <!-- <button (click)="setMonth(+1)">&gt;</button> -->
+  </div>
+  <ul class="days">
+    <li *ngFor="let day of days">{{ day }}</li>
+  </ul>
+  <ul class="dates">
+    <li
+      class="date"
+      *ngFor="let date of dates"
+      [ngClass]="{
+        'current-date': isCurrentDate(date),
+        grey: !isSameMonth(date)
+      }"
+      (click)="selected.emit(date)"
+    >
+      {{ date | date : "d" }}
+    </li>
+  </ul>
+</div>

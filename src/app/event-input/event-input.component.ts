@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { SharedService } from '../_service/shared.service';
 import { Events } from '../_interface/events';
+import { formatDate } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-event-input',
@@ -23,7 +25,7 @@ export class EventInputComponent {
 
   eventInputForm = this.formBuilder.group({
     title: [''],
-    when: [''],
+    date: [''],
     description: [''],
     // file: [''],
   });

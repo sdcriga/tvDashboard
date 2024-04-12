@@ -1,13 +1,37 @@
-.important-wrap {
+.important-container {
   display: flex;
-  justify-content: center;
-  form {
-    input {
-      margin: 1em;
-      padding: 0.3em;
-    }
-    button {
-      padding: 0.3em 1em;
+  justify-content: space-evenly;
+  .important-wrap {
+    display: flex;
+    justify-content: center;
+    form {
+      input {
+        margin: 1em;
+        padding: 0.3em;
+      }
+      button {
+        padding: 0.3em 1em;
+      }
     }
   }
+
+  .important-info-wrap {
+    h1 {
+      font-size: 20px;
+    }
+    .event-list {
+      margin-top: 1em;
+      p {
+        font-size: 13px;
+      }
+      button {
+        margin-top: 0.5em;
+        margin-right: 0.5em;
+        font-size: 13px;
+      }
+    }
+  }
+}
+.test-a {
+  padding-top: 10em;
 }

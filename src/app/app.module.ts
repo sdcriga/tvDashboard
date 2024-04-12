@@ -13,6 +13,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { ScreenViewComponent } from './screen-view/screen-view.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ImportantInputComponent,
     NavbarComponent,
     ScreenViewComponent,
+    CalendarComponent,
   ],
   imports: [
     BrowserModule,

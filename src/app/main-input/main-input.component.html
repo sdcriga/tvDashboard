@@ -24,6 +24,29 @@
         id="description"
       />
       <button type="submit">add</button>
+      <input
+        type="file"
+        class="file-input"
+        (change)="onFileSelected($event)"
+        #fileUpload
+        formControlName="file"
+        action="/upload"
+        method="post"
+        enctype="multipart/form-data"
+      />
+
+      <div class="file-upload">
+        {{ fileName || "No file uploaded yet." }}
+
+        <button
+          mat-mini-fab
+          color="primary"
+          class="upload-btn"
+          (click)="fileUpload.click()"
+        >
+          <!-- <mat-icon>attach_file</mat-icon> -->
+        </button>
+      </div>
       <!-- <div class="file-upload-wrap">
         <input type="file" id="file" name="file" />
         <input type="submit" value="Upload" />
