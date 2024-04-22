@@ -8,18 +8,21 @@ import { Observable, catchError, tap, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class DataSaveService {
-  private readonly server: string = 'http://localhost:8080';
+  // private readonly server: string = 'http://localhost:8080';
+  private readonly server: string = 'http://screen.local';
 
   constructor(private http: HttpClient) {}
 
-  newImportant$ = () =>
-    <Observable<CustomHttpResponse<Important>>>(
-      this.http
-        .get<CustomHttpResponse<Important>>(
-          `${this.server}/screen/create/important`
-        )
-        .pipe(tap(console.log), catchError(this.handleError))
+
+  newImportant$(belowInfo: Important): Observable<CustomHttpResponse<Important>> {
+    return this.http.post<CustomHttpResponse<Important>>(
+      `${this.server}/screen/create/important`,
+      belowInfo
+    ).pipe(
+      tap(console.log),
+      catchError(this.handleError)
     );
+  }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.log(error);

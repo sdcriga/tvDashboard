@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Important } from '../_interface/important';
 import { SharedService } from '../_service/shared.service';
+import { DataSaveService } from '../_service/data-save.service';
 
 @Component({
   selector: 'app-important-input',
@@ -13,7 +14,8 @@ export class ImportantInputComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private dataService: DataSaveService
   ) {}
 
   ngOnInit() {
@@ -25,10 +27,17 @@ export class ImportantInputComponent implements OnInit {
   });
 
   onSubmit(): void {
-    this.dataObject = this.importantInputForm.value as Important;
-    const formDataJson = JSON.stringify(this.importantInputForm.value);
-    console.log(this.dataObject.description + 'data object');
-    console.log(formDataJson + 'json');
-    this.sharedService.updateImportantStorageData(this.dataObject);
+    const belowInfo: Important = this.importantInputForm.value as Important;
+    this.dataService.newImportant$(belowInfo).subscribe({
+      next: (response) => {
+        console.log('BelowInfo created successfully:', response);
+        this.sharedService.updateImportantStorageData(response.data['belowInfo'] as Important);
+      },
+      error: (error) => {
+        console.error('Failed to create BelowInfo:', error);
+      }
+    });
   }
+
+
 }
