@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "screen-connect:build:production"
+              "buildTarget": "screen-connect:build:production"
             },
             "development": {
-              "browserTarget": "screen-connect:build:development"
+              "buildTarget": "screen-connect:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "screen-connect:build"
+            "buildTarget": "screen-connect:build"
           }
         },
         "test": {
