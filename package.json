@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "postbuild":"xcopy /s \".\/dist\" \"/Users/taariil2/Desktop/screeny/tvDashboard/dist\" \/Y"
   },
   "private": true,
   "dependencies": {
