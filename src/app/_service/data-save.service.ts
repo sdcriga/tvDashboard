@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Important } from '../_interface/important';
 import { CustomHttpResponse } from '../_interface/customhttp';
@@ -8,16 +8,21 @@ import { Observable, catchError, tap, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class DataSaveService {
-  // private readonly server: string = 'http://localhost:8080';
-  private readonly server: string = 'http://screen.local';
+   private readonly server: string = 'http://localhost';
+ // private readonly server: string = 'http://screen.local';
 
   constructor(private http: HttpClient) {}
+  
 
 
-  newImportant$(belowInfo: String): Observable<CustomHttpResponse<String>> {
-    return this.http.post<CustomHttpResponse<String>>(
+
+  newImportant$(belowInfo: Important): Observable<CustomHttpResponse<Important>> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+    return this.http.post<CustomHttpResponse<Important>>(
       `${this.server}:8080/screen/create/important`,
-      belowInfo
+      belowInfo, httpOptions
     ).pipe(
       tap(console.log),
       catchError(this.handleError)
