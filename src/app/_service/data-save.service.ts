@@ -21,7 +21,7 @@ export class DataSaveService {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
     return this.http.post<CustomHttpResponse<Important>>(
-      `${this.server}:8080/screen/create/important`,
+      `${this.server}/screen/create/important`,
       belowInfo, httpOptions
     ).pipe(
       tap(console.log),
