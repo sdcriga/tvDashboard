@@ -28,7 +28,7 @@ export class ImportantInputComponent implements OnInit {
 
   onSubmit(): void {
     const belowInfo: Important = this.importantInputForm.value as Important;
-    this.dataService.newImportant$(belowInfo).subscribe({
+    this.dataService.newImportant$(this.importantInputForm.value.description).subscribe({
       next: (response) => {
         console.log('BelowInfo created successfully:', response);
         this.sharedService.updateImportantStorageData(response.data['belowInfo'] as Important);
