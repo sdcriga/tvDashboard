@@ -9,7 +9,7 @@ import { Observable, catchError, tap, throwError } from 'rxjs';
 })
 export class DataSaveService {
   //  private readonly server: string = 'http://localhost';
- private readonly server: string = 'http://screen.local:8080';
+ private readonly server: string = 'http://screen.local:9090';
 
   constructor(private http: HttpClient) {}
   
