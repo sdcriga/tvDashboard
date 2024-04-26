@@ -14,13 +14,14 @@ export class DataSaveService {
   constructor(private http: HttpClient) {}
   
   getImportantData() {
-    return this.http.get(`${this.server}/test`);
+    return this.http.get(`${this.server}/screen/create/important`);
   }
 
 
   newImportant$(belowInfo: Important): Observable<CustomHttpResponse<Important>> {
     const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
+      headers: new HttpHeaders({'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest'})
     }
     return this.http.post<CustomHttpResponse<Important>>(
       `${this.server}/screen/create/important`,
