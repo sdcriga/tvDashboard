@@ -13,7 +13,9 @@ export class DataSaveService {
 
   constructor(private http: HttpClient) {}
   
-
+  getImportantData() {
+    return this.http.get(`${this.server}/test`);
+  }
 
 
   newImportant$(belowInfo: Important): Observable<CustomHttpResponse<Important>> {
