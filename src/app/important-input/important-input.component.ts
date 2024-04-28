@@ -32,7 +32,7 @@ export class ImportantInputComponent implements OnInit {
       next: (response) => {
         console.log('BelowInfo created successfully:', response);
       //  this.sharedService.updateImportantStorageData(response.data['belowInfo'] as Important);
-      this.dataService.getImportantData();
+      // this.dataService.getImportantData();
       },
       error: (error) => {
         console.error('Failed to create BelowInfo:', error);

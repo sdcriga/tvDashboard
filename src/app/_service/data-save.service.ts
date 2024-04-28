@@ -14,15 +14,14 @@ private readonly server: string = 'http://127.0.0.1';
 
   constructor(private http: HttpClient) {}
   
-  getImportantData() {
-    return this.http.get(`${this.server}/screen/create/important`);
-  }
+  // getImportantData() {
+  //   return this.http.get(`${this.server}/screen/create/important`);
+  // }
 
 
   newImportant$(belowInfo: Important): Observable<CustomHttpResponse<Important>> {
     const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest'})
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
     return this.http.post<CustomHttpResponse<Important>>(
       `${this.server}/screen/create/important`,
