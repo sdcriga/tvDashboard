@@ -9,7 +9,7 @@ import { Observable, catchError, tap, throwError } from 'rxjs';
 })
 export class DataSaveService {
   //  private readonly server: string = 'http://localhost';
- private readonly server: string = 'http://screen.local/api';
+ private readonly server: string = 'http://screen.local:8080';
 // private readonly server: string = 'http://127.0.0.1';
 
   constructor(private http: HttpClient) {}
@@ -24,7 +24,7 @@ export class DataSaveService {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
     return this.http.post<CustomHttpResponse<Important>>(
-      `${this.server}/create/important`,
+      `${this.server}/api/create/important`,
       belowInfo, httpOptions
     ).pipe(
       tap(console.log),
