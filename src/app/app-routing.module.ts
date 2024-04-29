@@ -21,10 +21,10 @@ const routes: Routes = [
   {
     path: 'important',
     component: ImportantInputComponent,
-  },
-  { path: '', component: ScreenViewComponent },
-  { path: '', redirectTo: '/', pathMatch: 'full' },
-  { path: '**', component: ScreenViewComponent },
+  }
+  // { path: '', component: ScreenViewComponent },
+  // { path: '', redirectTo: '/', pathMatch: 'full' },
+  // { path: '**', component: ScreenViewComponent },
 ];
 
 @NgModule({
