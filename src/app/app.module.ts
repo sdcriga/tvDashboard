@@ -12,8 +12,9 @@ import { ImportantInputComponent } from './important-input/important-input.compo
 import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { ScreenViewComponent } from './screen-view/screen-view.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalendarComponent } from './calendar/calendar.component';
+import { ReversePipe } from './reverse.pipe';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,8 @@ import { CalendarComponent } from './calendar/calendar.component';
     HttpClientModule,
     RouterModule,
     ReactiveFormsModule,
+    FormsModule,
+    ReversePipe
   ],
   providers: [],
   bootstrap: [AppComponent],

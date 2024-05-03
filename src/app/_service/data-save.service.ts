@@ -1,29 +1,30 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Important } from '../_interface/important';
+
 import { CustomHttpResponse } from '../_interface/customhttp';
 import { Observable, catchError, tap, throwError } from 'rxjs';
+import { BelowInfo } from '../_interface/belowinfo';
+import { SavedBelowInfo } from '../_interface/savedinfo';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataSaveService {
-  //  private readonly server: string = 'http://localhost';
- private readonly server: string = 'http://screen.local:8080';
-// private readonly server: string = 'http://127.0.0.1';
+ //private readonly server: string = 'http://screen.local:8080';
+ private readonly server: string = 'http://localhost:8080';
+
+ dataObject: BelowInfo[] | null = null;
+ favouritesDataObject: SavedBelowInfo[] | null = null;
+  // dataObject = new BehaviorSubject<BelowInfo[] | null>(null);
 
   constructor(private http: HttpClient) {}
   
-  // getImportantData() {
-  //   return this.http.get(`${this.server}/screen/create/important`);
-  // }
 
-
-  newImportant$(belowInfo: Important): Observable<CustomHttpResponse<Important>> {
+  newImportant$(belowInfo: BelowInfo): Observable<CustomHttpResponse<BelowInfo>> {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
-    return this.http.post<CustomHttpResponse<Important>>(
+    return this.http.post<CustomHttpResponse<BelowInfo>>(
       `${this.server}/api/create/important`,
       belowInfo, httpOptions
     ).pipe(
@@ -31,6 +32,105 @@ export class DataSaveService {
       catchError(this.handleError)
     );
   }
+
+  saveImportant$(belowInfo: BelowInfo, id: number): Observable<CustomHttpResponse<BelowInfo>> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+    return this.http.post<CustomHttpResponse<BelowInfo>>(
+      `${this.server}/api/save/important/${id}`,
+      belowInfo, httpOptions
+    ).pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
+  }
+
+
+  getAllImportantInformation$(): Observable<CustomHttpResponse<BelowInfo[]>> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.get<CustomHttpResponse<BelowInfo[]>>(
+      `${this.server}/api/important`,
+      httpOptions
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getAllSavedImportantInformation$(): Observable<CustomHttpResponse<SavedBelowInfo[]>> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.get<CustomHttpResponse<SavedBelowInfo[]>>(
+      `${this.server}/api/saved/important`,
+      httpOptions
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+  deleteInformation$(id: number){
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.delete<CustomHttpResponse<BelowInfo>>(
+      `${this.server}/api/delete/important/${id}`,
+      httpOptions
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteFavouriteInformation$(id: number){
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.delete<CustomHttpResponse<BelowInfo>>(
+      `${this.server}/api/delete/favourite/${id}`,
+      httpOptions
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateInformation$ = (id: number, description: String) =>
+  <Observable<CustomHttpResponse<BelowInfo>>>(
+    this.http
+      .patch<CustomHttpResponse<BelowInfo>>(
+        `${this.server}/api/update/important/${id}`,
+        description
+      )
+      .pipe(tap(console.log), catchError(this.handleError))
+  );
+
+
+  getAndStoreBelowObject(): void {
+    this.getAllImportantInformation$().subscribe({
+      next: (response) => {
+        console.log('BelowInfo received:', response);
+        this.dataObject = response.data["important"]; 
+        console.log('BelowInfo object:', this.dataObject);
+      },
+      error: (error) => {
+        console.error('Failed to create BelowInfo:', error);
+      }
+    });
+  }
+
+  getAndStoreSavedBelowObject(): void {
+    this.getAllSavedImportantInformation$().subscribe({
+      next: (response) => {
+        this.favouritesDataObject = response.data["saved"]; 
+      },
+      error: (error) => {
+        console.error('Failed to create BelowInfo:', error);
+      }
+    });
+  }
+
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.log(error);
@@ -47,4 +147,6 @@ export class DataSaveService {
     }
     return throwError(() => errorMessage);
   }
+
+
 }

@@ -24,7 +24,8 @@
       </div>
     </div>
   </div>
-  <div class="important-info-container">
-    <p>{{ importantSectionObject.description }}</p>
+  <div class="important-info-container" *ngIf="this.dataService.dataObject && this.dataService.dataObject.length > 0">
+      <p > {{ this.dataService.dataObject[this.dataService.dataObject.length - 1].description}}</p>
   </div>
+
 </div>

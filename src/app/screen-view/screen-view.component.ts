@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { SharedService } from '../_service/shared.service';
-import { Important } from '../_interface/important';
+import { BelowInfo } from '../_interface/belowinfo';
 import { Main } from '../_interface/main';
 import { Events } from '../_interface/events';
+import { DataSaveService } from '../_service/data-save.service';
 
 @Component({
   selector: 'app-screen-view',
@@ -10,17 +11,18 @@ import { Events } from '../_interface/events';
   styleUrls: ['./screen-view.component.scss'],
 })
 export class ScreenViewComponent {
-  importantSectionObject: Important | null = null;
   eventSectionObject: Events[] | null = null;
   mainSectionObject: Main | null = null;
 
-  constructor(private sharedService: SharedService) {}
+ dataObject: BelowInfo[] | null = null;
+
+  constructor(private sharedService: SharedService, public dataService: DataSaveService) {}
 
   ngOnInit() {
-    this.importantSectionObject = this.sharedService.getImportantSectionData();
-
+    //local storage
     this.mainSectionObject = this.sharedService.getMainSectionData();
-
     this.eventSectionObject = this.sharedService.getEventSectionData();
+    this.dataService.getAndStoreBelowObject();
   }
+
 }

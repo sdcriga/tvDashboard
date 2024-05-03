@@ -1,3 +1,4 @@
+<div class="important-section-wrap">
 <app-navbar></app-navbar>
 <div class="important-container">
   <div class="important-wrap">
@@ -14,19 +15,51 @@
       <button type="submit">Add</button>
     </form>
   </div>
+  <!-- [size]="this.dataService.dataObject.length" -->
   <div class="important-info-wrap">
-    <h1>Current</h1>
-    <div class="event-list">
-      <p>
-        Lorem ipsum dolor sit amet <br />
-        consectetur adipisicing elit. <br />
-        Neque, cupiditate!
-      </p>
-      <button>Delete</button>
-      <button>Edit</button>
+    <h2>Current</h2>
+    <div class="event-list" *ngIf="this.dataService.dataObject && this.dataService.dataObject.length > 0">
+      <p *ngIf="!this.editMode"> {{ this.dataService.dataObject[this.dataService.dataObject.length - 1].description}}</p>
+      <input appInputSize *ngIf="this.editMode" type="text" 
+      [(ngModel)]="this.dataService.dataObject[this.dataService.dataObject.length - 1].description" 
+      class="editable"
+       (keyup.enter)="onEdit(this.dataService.dataObject[this.dataService.dataObject.length - 1].id, this.dataService.dataObject[this.dataService.dataObject.length - 1].description)">
+      <button class="general-btn-style" *ngIf="!this.editMode" (click)="onDelete(this.dataService.dataObject[this.dataService.dataObject.length - 1].id)">Delete</button>
+      <button class="general-btn-style" *ngIf="!this.editMode" (click)="goToEditIput()">Edit</button>
+      <button class="general-btn-style" *ngIf="this.editMode" (click)="exitEditMode()">Cancel</button>
     </div>
+    <div class="event-list">
+        <p *ngIf="this.dataService.dataObject && this.dataService.dataObject.length == 0"> {{ this.currentInformationText}}</p>
+    </div>
+    <div class="error" *ngIf="emptyDescriptionErrorMessage">{{ emptyDescriptionErrorMessage }}</div>
   </div>
 </div>
+<div class="previous-info-container">
+  <h2 >History</h2>
+  <div *ngIf="this.dataService.dataObject && this.dataService.dataObject.length > 0" >
+    <div *ngFor="let info of this.dataService.dataObject | reverse let i = index" >
+      <div *ngIf="i !== 0" class="info-item">
+      <div class="individual-info">
+        <p class="history-info">{{ info.description }}</p>
+        </div>
+        <button class="general-btn-style btn">Repeat</button>
+        <button class="general-btn-style btn" 
+        [ngClass]="{'button-enlarged': isButtonExpanded}"
+        (click)="onSave(info.description, info.id)"><svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M7.5 12.04l-4.326 2.275L4 9.497.5 6.086l4.837-.703L7.5 1l2.163 4.383 4.837.703L11 9.497l.826 4.818L7.5 12.041z" stroke="#FF8066" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+    </div>
+    </div>
+</div>
+</div>
+<div class="saved-container">
+<h2>Saved templates</h2>
+<div  *ngIf="this.dataService.favouritesDataObject && this.dataService.favouritesDataObject.length > 0">
+  <div *ngFor="let info of this.dataService.favouritesDataObject" class="saved-info-item">
+  <p>{{info.description}}</p>
+  <svg (click)="onFavouriteDelete(info.id)"  viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M4.5 3V1.5a1 1 0 011-1h4a1 1 0 011 1V3M0 3.5h15m-13.5 0v10a1 1 0 001 1h10a1 1 0 001-1v-10M7.5 7v5m-3-3v3m6-3v3" stroke="#C34A36"></path></svg>
+  </div>
+</div>
+</div>
 <div class="test-a">
-  <a href="/">Main screen</a>
+  <a href="/">Screen view</a>
+</div>
 </div>

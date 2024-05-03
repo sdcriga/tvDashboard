@@ -1,3 +1,5 @@
+.important-section-wrap{
+  position: relative;
 .important-container {
   display: flex;
   justify-content: space-evenly;
@@ -9,29 +11,84 @@
         margin: 1em;
         padding: 0.3em;
       }
-      button {
-        padding: 0.3em 1em;
-      }
     }
   }
-
   .important-info-wrap {
-    h1 {
+    h2 {
       font-size: 20px;
     }
     .event-list {
       margin-top: 1em;
       p {
         font-size: 13px;
+        padding: 3px;
       }
-      button {
-        margin-top: 0.5em;
-        margin-right: 0.5em;
-        font-size: 13px;
+      button{
+        margin: 0.5em 0.5em;
       }
     }
   }
 }
-.test-a {
-  padding-top: 10em;
+.previous-info-container{
+  padding: 0 15em 0 40em;
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+  h2{
+    font-size: 20px;
+    margin-top: 3em;
+  }
+  .info-item{
+    display: flex;
+    gap: 1em;
+padding-top: 1em;
+.individual-info{
+
 }
+  .btn{
+font-size: 10px ;
+    background-color: aquamarine;
+  }
+  }
+}
+.saved-container{
+  margin-left: 80px;
+  h2{
+    font-size: 20px;
+    margin-top: 3em;
+  }
+  .saved-info-item{
+    margin-top: 1em;
+    display: flex;
+    gap: 0.8em;
+    align-items: center;
+
+  }
+}
+.test-a {
+position: absolute;
+top: 0;
+}
+}
+
+
+.editable{
+  // width: fit-content;
+  padding: 5px 7px;
+  border: solid 0.8px lightgrey;
+  outline:none;
+  background:transparent;
+  // box-sizing: border-box;
+}
+
+.general-btn-style{
+  padding: 0.5em 1em;
+  font-size: 13px;
+  background-color: #fff;
+  border: solid 0.8px darkgrey;
+  transition: transform 0.2s ease-in-out;
+}
+.button-bigger {
+  transform: scale(1.1);  /* 10% */
+}
+
