@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { DataSaveService } from '../_service/data-save.service';
+import { EventColorService } from '../_service/event-color.service';
 
 const DAY_MS = 60 * 60 * 24 * 1000;
 
@@ -9,12 +11,40 @@ const DAY_MS = 60 * 60 * 24 * 1000;
 })
 export class CalendarComponent {
   dates: Array<Date>;
-  days = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
+  eventDates: Date[] = [];
+  days = ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
   date = new Date();
   @Output() selected = new EventEmitter();
 
-  constructor() {
+  constructor(private dataService: DataSaveService, public colorService: EventColorService) {
     this.dates = this.getCalendarDays();
+    this.fetchEvents();
+  }
+
+  fetchEvents() {
+    this.dataService.getAllEventInformation$().subscribe({
+      next: response => {
+        this.eventDates = response.data["events"].map(event => new Date(event.created_at));
+        this.dates = this.getCalendarDays(); 
+      },
+      error: err => console.error('Failed to load events:', err)
+    });
+  }
+
+  getEventColor(date: Date): string | null {
+    const eventIndex = this.dataService.dataEventsObject?.findIndex(event =>
+      new Date(event.created_at).toDateString() === date.toDateString()
+    );
+    return eventIndex !== -1 ? this.colorService.getColor(eventIndex) : null;
+  }
+
+  
+  hasEvent(date: Date): boolean {
+    return this.eventDates.some(eventDate =>
+      eventDate.getDate() === date.getDate() &&
+      eventDate.getMonth() === date.getMonth() &&
+      eventDate.getFullYear() === date.getFullYear()
+    );
   }
 
   setMonth(inc) {

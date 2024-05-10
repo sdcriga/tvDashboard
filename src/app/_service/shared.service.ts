@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { BelowInfo } from '../_interface/belowinfo';
-import { Main } from '../_interface/main';
 import { Events } from '../_interface/events';
+import { MidInfo } from '../_interface/midinfo';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class SharedService {
   private importantDataSource = new BehaviorSubject<BelowInfo | null>(null);
-  private mainDataSource = new BehaviorSubject<Main | null>(null);
+  private mainDataSource = new BehaviorSubject<MidInfo | null>(null);
   private eventDataSource = new BehaviorSubject<Events[] | null>(null);
 
   sharedDataObject: BelowInfo[] | null = null;
@@ -19,7 +20,7 @@ export class SharedService {
   updateImportantData(data: BelowInfo) {
     this.importantDataSource.next(data);
   }
-  updateMaintData(data: Main) {
+  updateMaintData(data: MidInfo) {
     this.mainDataSource.next(data);
   }
   updateEventData(data: Events[]) {
@@ -29,7 +30,7 @@ export class SharedService {
   updateImportantStorageData(data: BelowInfo) {
     localStorage.setItem('importantData', JSON.stringify(data));
   }
-  updateMainStorageData(data: Main) {
+  updateMainStorageData(data: MidInfo) {
     localStorage.setItem('mainData', JSON.stringify(data));
   }
   updateEventStorageData(data: Events) {
@@ -45,7 +46,7 @@ export class SharedService {
     const data = localStorage.getItem('importantData');
     return data ? JSON.parse(data) : null;
   }
-  getMainSectionData(): Main | null {
+  getMainSectionData(): MidInfo | null {
     const data = localStorage.getItem('mainData');
     return data ? JSON.parse(data) : null;
   }

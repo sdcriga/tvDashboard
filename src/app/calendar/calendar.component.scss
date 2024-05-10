@@ -15,11 +15,10 @@
   }
   ul.days > li,
   li.date {
-    /* Apply consistent styling to both */
     padding: 0.3em 0.5em;
     justify-self: center;
     align-self: center;
-    height: 3em; /* Set a fixed height */
+    height: 3em;
   }
   ul.days > li {
     color: #c0c0c0;
@@ -39,6 +38,16 @@
 
 .current-date {
   color: red !important;
+}
+
+.event-dot {
+  height: 5px;
+  width: 5px;
+  background-color: red;
+  border-radius: 50%;
+  display: block; 
+  margin: auto;
+  margin-top: 2px; 
 }
 
 //   li {

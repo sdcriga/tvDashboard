@@ -3,19 +3,19 @@
   <div class="event-wrap">
     <form (ngSubmit)="onSubmit()" [formGroup]="eventInputForm">
       <input type="text" placeholder="Title" formControlName="title" />
-      <input type="date" placeholder="Date" formControlName="date" />
+      <input type="date" placeholder="Date" formControlName="created_at" />
       <input
         type="text"
         placeholder="Description"
         formControlName="description"
       />
-      <input
+      <!-- <input
         type="file"
         id="file"
         name="file"
         formControlName="file"
         #filePicker
-      />
+      /> -->
       <input type="submit" value="Add" />
     </form>
   </div>

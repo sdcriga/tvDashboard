@@ -23,8 +23,15 @@
         name="description"
         id="description"
       />
-      <button type="submit">add</button>
       <input
+      type="text"
+      placeholder="Image link"
+      formControlName="illustration"
+      name="illustration"
+      id="illustration"
+    />
+      <button type="submit">add</button>
+      <!-- <input
         type="file"
         class="file-input"
         (change)="onFileSelected($event)"
@@ -44,9 +51,8 @@
           class="upload-btn"
           (click)="fileUpload.click()"
         >
-          <!-- <mat-icon>attach_file</mat-icon> -->
         </button>
-      </div>
+      </div> -->
       <!-- <div class="file-upload-wrap">
         <input type="file" id="file" name="file" />
         <input type="submit" value="Upload" />

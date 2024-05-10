@@ -20,6 +20,7 @@
       (click)="selected.emit(date)"
     >
       {{ date | date : "d" }}
+      <span *ngIf="hasEvent(date)" class="event-dot" [ngStyle]="{'background-color': getEventColor(date)}"></span>
     </li>
   </ul>
 </div>

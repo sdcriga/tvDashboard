@@ -5,6 +5,8 @@ import { CustomHttpResponse } from '../_interface/customhttp';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { BelowInfo } from '../_interface/belowinfo';
 import { SavedBelowInfo } from '../_interface/savedinfo';
+import { Events } from '../_interface/events';
+import { MidInfo } from '../_interface/midinfo';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +16,9 @@ export class DataSaveService {
  private readonly server: string = 'http://localhost:8080';
 
  dataObject: BelowInfo[] | null = null;
+ dataEventsObject: Events[] | null = null;
+ dataMainObject: MidInfo[] | null = null;
  favouritesDataObject: SavedBelowInfo[] | null = null;
-  // dataObject = new BehaviorSubject<BelowInfo[] | null>(null);
 
   constructor(private http: HttpClient) {}
   
@@ -27,6 +30,32 @@ export class DataSaveService {
     return this.http.post<CustomHttpResponse<BelowInfo>>(
       `${this.server}/api/create/important`,
       belowInfo, httpOptions
+    ).pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
+  }
+
+  newEvent$(event: Events): Observable<CustomHttpResponse<Events>> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+    return this.http.post<CustomHttpResponse<Events>>(
+      `${this.server}/api/create/event`,
+      event, httpOptions
+    ).pipe(
+      tap(console.log),
+      catchError(this.handleError)
+    );
+  }
+
+  newMain$(main: MidInfo): Observable<CustomHttpResponse<MidInfo>> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+    return this.http.post<CustomHttpResponse<MidInfo>>(
+      `${this.server}/api/create/main`,
+      main, httpOptions
     ).pipe(
       tap(console.log),
       catchError(this.handleError)
@@ -53,6 +82,31 @@ export class DataSaveService {
     };
     return this.http.get<CustomHttpResponse<BelowInfo[]>>(
       `${this.server}/api/important`,
+      httpOptions
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getAllEventInformation$(): Observable<CustomHttpResponse<Events[]>> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.get<CustomHttpResponse<Events[]>>(
+      `${this.server}/api/events`,
+      httpOptions
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+  getAllMainInformation$(): Observable<CustomHttpResponse<MidInfo[]>> {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.get<CustomHttpResponse<MidInfo[]>>(
+      `${this.server}/api/main`,
       httpOptions
     ).pipe(
       catchError(this.handleError)
@@ -120,6 +174,20 @@ export class DataSaveService {
     });
   }
 
+
+  getAndStoreEventObject(): void {
+    this.getAllEventInformation$().subscribe({
+      next: (response) => {
+        console.log('Events list received:', response);
+        this.dataEventsObject = response.data["events"]; 
+        console.log('Events object:', this.dataEventsObject);
+      },
+      error: (error) => {
+        console.error('Failed to create Event:', error);
+      }
+    });
+  }
+
   getAndStoreSavedBelowObject(): void {
     this.getAllSavedImportantInformation$().subscribe({
       next: (response) => {
@@ -127,6 +195,20 @@ export class DataSaveService {
       },
       error: (error) => {
         console.error('Failed to create BelowInfo:', error);
+      }
+    });
+  }
+
+
+  getAndStoreMainObject(): void {
+    this.getAllMainInformation$().subscribe({
+      next: (response) => {
+        console.log('Main list received:', response);
+        this.dataMainObject = response.data["main"]; 
+        console.log('Main object:', this.dataMainObject);
+      },
+      error: (error) => {
+        console.error('Failed to create Main:', error);
       }
     });
   }

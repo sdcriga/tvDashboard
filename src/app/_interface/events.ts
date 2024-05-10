@@ -1,6 +1,6 @@
 export interface Events {
   title: string | null;
-  date: string | null;
+  created_at: string | null;
   description: string | null;
   // file: File | null;
 }

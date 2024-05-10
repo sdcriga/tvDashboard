@@ -1,17 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { SharedService } from '../_service/shared.service';
 import { Events } from '../_interface/events';
-import { formatDate } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { DataSaveService } from '../_service/data-save.service';
 
 @Component({
   selector: 'app-event-input',
   templateUrl: './event-input.component.html',
   styleUrls: ['./event-input.component.scss'],
 })
-export class EventInputComponent {
-  dataObject: Events | null = null;
+export class EventInputComponent implements OnInit {
+  dataEventsObject: Events[] | null = null;
   selectedFile: File;
   msg: string = '';
   image: any;
@@ -20,24 +19,32 @@ export class EventInputComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    public dataService: DataSaveService
   ) {}
+
+  ngOnInit() {
+    this.dataService.getAndStoreEventObject();
+    
+  }
 
   eventInputForm = this.formBuilder.group({
     title: [''],
-    date: [''],
+    created_at: [''],
     description: [''],
     // file: [''],
   });
 
   onSubmit(): void {
-    this.dataObject = this.eventInputForm.value as Events;
-    console.log(this.eventInputForm.value + 'test test');
-    const formDataJson = JSON.stringify(this.eventInputForm.value);
-    console.log(formDataJson, 'json');
-    this.submittedForms.push(this.dataObject);
-    this.sharedService.updateEventStorageData(this.dataObject);
-    this.eventInputForm.reset();
+    const event: Events = this.eventInputForm.value as Events;
+    this.dataService.newEvent$(event).subscribe({
+      next: (response) => {
+        console.log('Event created successfully:', response);
+      },
+      error: (error) => {
+        console.error('Failed to create Event:', error);
+      }
+    });
   }
 
   // onFileSelect(event: any) {
