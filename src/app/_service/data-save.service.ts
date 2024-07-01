@@ -12,8 +12,8 @@ import { MidInfo } from '../_interface/midinfo';
   providedIn: 'root',
 })
 export class DataSaveService {
- //private readonly server: string = 'http://screen.local:8080';
- private readonly server: string = 'http://localhost:8080';
+ private readonly server: string = 'http://raspberrypi5.local:8080';
+//  private readonly server: string = 'http://localhost:8080';
 
  dataObject: BelowInfo[] | null = null;
  dataEventsObject: Events[] | null = null;
