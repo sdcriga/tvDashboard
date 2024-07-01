@@ -15,6 +15,7 @@ import { ScreenViewComponent } from './screen-view/screen-view.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ReversePipe } from './reverse.pipe';
+import { NewScreenViewComponent } from './new-screen-view/new-screen-view.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ReversePipe } from './reverse.pipe';
     ImportantInputComponent,
     NavbarComponent,
     ScreenViewComponent,
+    NewScreenViewComponent,
     CalendarComponent,
   ],
   imports: [

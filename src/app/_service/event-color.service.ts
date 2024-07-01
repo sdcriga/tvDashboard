@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class EventColorService {
-  colors: string[] = ['#FF8066','#845EC2', '#00C9A7', '#FEFEDF', '#FF6F91'];
+  colors: string[] = ['#FF8066','#845EC2', '#00C9A7', '#FFD67E', '#FF6F91'];
 
   constructor() { }
 

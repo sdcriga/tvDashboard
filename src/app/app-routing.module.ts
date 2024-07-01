@@ -4,11 +4,16 @@ import { MainInputComponent } from './main-input/main-input.component';
 import { EventInputComponent } from './event-input/event-input.component';
 import { ImportantInputComponent } from './important-input/important-input.component';
 import { ScreenViewComponent } from './screen-view/screen-view.component';
+import { NewScreenViewComponent } from './new-screen-view/new-screen-view.component';
 
 const routes: Routes = [
   {
     path: 'screen',
     component: ScreenViewComponent,
+  },
+  {
+    path: 'new-screen',
+    component: NewScreenViewComponent,
   },
   {
     path: 'main',
