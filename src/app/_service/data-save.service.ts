@@ -12,8 +12,8 @@ import { News } from '../_interface/news';
   providedIn: 'root',
 })
 export class DataSaveService {
-//  private readonly server: string = 'http://officescreen.local:8080';
- private readonly server: string = 'http://localhost:8080';
+ private readonly server: string = 'http://officescreen.local:8080';
+//  private readonly server: string = 'http://localhost:8080';
 
  dataObject: BelowInfo[] | null = null;
  dataEventsObject: Events[] | null = null;
