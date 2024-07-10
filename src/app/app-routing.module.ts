@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainInputComponent } from './main-input/main-input.component';
+import { NewsInputComponent } from './news-input/news-input.component';
 import { EventInputComponent } from './event-input/event-input.component';
 import { ImportantInputComponent } from './important-input/important-input.component';
 import { ScreenViewComponent } from './screen-view/screen-view.component';
 import { NewScreenViewComponent } from './new-screen-view/new-screen-view.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -16,8 +17,12 @@ const routes: Routes = [
     component: NewScreenViewComponent,
   },
   {
-    path: 'main',
-    component: MainInputComponent,
+    path: 'dashboard',
+    component: DashboardComponent,
+  },
+  {
+    path: 'news',
+    component: NewsInputComponent,
   },
   {
     path: 'event',

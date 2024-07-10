@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Events } from '../_interface/events';
-import { MidInfo } from '../_interface/midinfo';
+import { News } from '../_interface/news';
 import { BelowInfo } from '../_interface/belowinfo';
 import { SharedService } from '../_service/shared.service';
 import { DataSaveService } from '../_service/data-save.service';
@@ -14,7 +14,7 @@ import { EventColorService } from '../_service/event-color.service';
 export class NewScreenViewComponent {
 
   eventSectionObject: Events[] | null = null;
-  mainSectionObject: MidInfo[] | null = null;
+  mainSectionObject: News[] | null = null;
 
  dataObject: BelowInfo[] | null = null;
 
@@ -24,7 +24,7 @@ export class NewScreenViewComponent {
     this.eventSectionObject = this.sharedService.getEventSectionData();
     this.dataService.getAndStoreBelowObject();
     this.dataService.getAndStoreEventObject();
-    this.dataService.getAndStoreMainObject();
+    this.dataService.getAndStoreNewsObject();
   }
 
   getColor(index: number): string {

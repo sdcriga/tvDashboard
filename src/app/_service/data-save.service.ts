@@ -6,18 +6,18 @@ import { Observable, catchError, tap, throwError } from 'rxjs';
 import { BelowInfo } from '../_interface/belowinfo';
 import { SavedBelowInfo } from '../_interface/savedinfo';
 import { Events } from '../_interface/events';
-import { MidInfo } from '../_interface/midinfo';
+import { News } from '../_interface/news';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataSaveService {
- private readonly server: string = 'http://officescreen.local:8080';
-//  private readonly server: string = 'http://localhost:8080';
+//  private readonly server: string = 'http://officescreen.local:8080';
+ private readonly server: string = 'http://localhost:8080';
 
  dataObject: BelowInfo[] | null = null;
  dataEventsObject: Events[] | null = null;
- dataMainObject: MidInfo[] | null = null;
+ dataNewsObject: News[] | null = null;
  favouritesDataObject: SavedBelowInfo[] | null = null;
 
   constructor(private http: HttpClient) {}
@@ -49,12 +49,12 @@ export class DataSaveService {
     );
   }
 
-  newMain$(main: MidInfo): Observable<CustomHttpResponse<MidInfo>> {
+  newMain$(main: News): Observable<CustomHttpResponse<News>> {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
-    return this.http.post<CustomHttpResponse<MidInfo>>(
-      `${this.server}/api/create/main`,
+    return this.http.post<CustomHttpResponse<News>>(
+      `${this.server}/api/create/news`,
       main, httpOptions
     ).pipe(
       tap(console.log),
@@ -101,12 +101,12 @@ export class DataSaveService {
   }
 
 
-  getAllMainInformation$(): Observable<CustomHttpResponse<MidInfo[]>> {
+  getAllMainInformation$(): Observable<CustomHttpResponse<News[]>> {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    return this.http.get<CustomHttpResponse<MidInfo[]>>(
-      `${this.server}/api/main`,
+    return this.http.get<CustomHttpResponse<News[]>>(
+      `${this.server}/api/news`,
       httpOptions
     ).pipe(
       catchError(this.handleError)
@@ -200,12 +200,12 @@ export class DataSaveService {
   }
 
 
-  getAndStoreMainObject(): void {
+  getAndStoreNewsObject(): void {
     this.getAllMainInformation$().subscribe({
       next: (response) => {
         console.log('Main list received:', response);
-        this.dataMainObject = response.data["main"]; 
-        console.log('Main object:', this.dataMainObject);
+        this.dataNewsObject = response.data["news"]; 
+        console.log('Main object:', this.dataNewsObject);
       },
       error: (error) => {
         console.error('Failed to create Main:', error);

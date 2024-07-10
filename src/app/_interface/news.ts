@@ -1,6 +1,5 @@
-export interface MidInfo {
+export interface News {
   title: string | null;
-  when: string | null;
   description: string | null;
   illustration: string | null;
   // file: File | null;

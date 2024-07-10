@@ -1,4 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
 *,
 *::before,
 *::after {
@@ -17,6 +16,23 @@ body {
 // body {
 //    height: 100%;
 // }
+
+@font-face {
+  font-family: SwissFont;
+  src: url('./assets/fonts/TheSansSwisscom_33_TT.ttf') format('truetype');
+}
+@font-face {
+  font-family: SwissFontOne;
+  src: url('./assets/fonts/TheSansSwisscom_37_TT.ttf') format('truetype');
+}
+@font-face {
+  font-family: SwissFontTwo;
+  src: url('./assets/fonts/TheSansSwisscom_55_TT.ttf') format('truetype');
+}
+@font-face {
+  font-family: SwissFontBold;
+  src: url('./assets/fonts/TheSansSwisscom_57_TT.ttf') format('truetype');
+}
 
 :root {
   --background-color: #ffff;

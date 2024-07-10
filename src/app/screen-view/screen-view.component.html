@@ -1,32 +1,59 @@
 <div class="screen-view-container">
-  <button><a href="/main">ADD</a></button>
-  <div class="calendar">
+  <!-- <button><a href="/news">ADD</a></button> -->
+  <!-- <div class="calendar">
     <app-calendar></app-calendar>
-  </div>
-  <div class="main-info-container">
-    <div *ngIf="this.dataService.dataMainObject && this.dataService.dataMainObject.length > 0">
-    <p>{{this.dataService.dataMainObject[0].title}}</p>
-    <img class="main-img" src="{{this.dataService.dataMainObject[0].illustration}}" alt="">
+  </div> -->
+<div class="news-events-wrap">
+  <div class="news-info-container">
+
+    <div class="news-title">
+  <h1 class="news-title">News</h1>   
+  <h1 class="date-title">{{date | date: "EEEE, MMMM d, y"}}</h1> 
     </div>
+    <div class="points-wrap">
+    <div class="news-content-wrap" *ngIf="this.dataService.dataNewsObject && this.dataService.dataNewsObject.length > 0">
+      <img class="news-img" src="{{this.dataService.dataNewsObject[activeIndex].illustration}}" alt="">
+      <h1>{{this.dataService.dataNewsObject[activeIndex].title | capitalize : "sentenceCase"}}</h1>
+      <p>{{this.dataService.dataNewsObject[activeIndex].description}}</p>
+      </div>
+
+      </div>
+
   </div>
+
+    
   <div class="events-title-wrap">
     <h1 class="event-title">Next events</h1>
 
     <div class="event-info-container">
+      <!-- [ngStyle]="{'background-color': getColor(i)}" -->
       <div
         *ngFor="let event of this.dataService.dataEventsObject; index as i"
-        class="event-list-container" [ngStyle]="{'background-color': getColor(i)}"
+        class="event-list-container"
       >
         <div class="event-title-wrap">
+          <div>
+            <img src="{{event.illustration}}" alt="">
+          </div>
+          <div>
+          <div class="event-time-wrap">
+          <p class="event-time">{{ event.created_at | date : "MMMM d" }}, {{ event.created_at | date : "yyyy"}} - {{event.time}}</p>
+</div>
           <h3>{{ event.title }}</h3>
-          <p>{{ event.created_at | date : "dd.MM.yyyy" }}</p>
+          </div>
         </div>
-        <p>{{ event.description }}</p>
       </div>
     </div>
   </div>
+</div>
+
+<!-- <div class="point-slider">
+  <div *ngFor="let item of dataService.dataNewsObject; let i = index" class="dot" [class.active]="i === activeIndex"></div>
+</div> -->
+
   <div class="important-info-container" *ngIf="this.dataService.dataObject && this.dataService.dataObject.length > 0">
-      <p > {{ this.dataService.dataObject[this.dataService.dataObject.length - 1].description}}</p>
+      <marquee class="marquee" direction="right" scrolldelay="80" behavior="loop">{{ this.dataService.dataObject[this.dataService.dataObject.length - 1].description}}</marquee>
   </div>
+  
 
 </div>

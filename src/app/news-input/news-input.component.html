@@ -1,20 +1,13 @@
-<app-navbar></app-navbar>
+<!-- <app-navbar></app-navbar> -->
 <div>
   <div class="main-wrap">
-    <form (ngSubmit)="onSubmit()" [formGroup]="mainInputForm">
+    <form (ngSubmit)="onSubmit()" [formGroup]="newsInputForm">
       <input
         type="text"
         placeholder="Title"
         formControlName="title"
         name="title"
         id="title"
-      />
-      <input
-        type="text"
-        placeholder="When"
-        formControlName="when"
-        name="when"
-        id="when"
       />
       <input
         type="text"
@@ -59,5 +52,5 @@
       </div> -->
     </form>
   </div>
-  <a href="/">Main screen</a>
+  <!-- <a href="/">Main screen</a> -->
 </div>

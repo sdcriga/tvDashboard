@@ -1,5 +1,4 @@
 nav {
-  margin: 3em 12em 2em 12em;
   .nav-bar-container {
     display: flex;
     justify-content: center;
@@ -13,7 +12,8 @@ nav {
       // justify-content: center;
       a {
         text-decoration: none;
-        color: #070035;
+        color: #001155;
+        font-family: SwissFontTwo;
       }
       .active-link {
         color: #5944C6;

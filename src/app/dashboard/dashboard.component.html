@@ -1,0 +1,26 @@
+<div class="dashboard-container">
+<div class="header">
+    <!-- <app-navbar></app-navbar> -->
+</div>
+<div class="sidebar">
+    <div class="user-icon"></div>
+    <ul class="add-container">
+        <li class="add-list" (click)="showNewsInput()"><svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M7.5 4v7M4 7.5h7m-3.5 7a7 7 0 110-14 7 7 0 010 14z" stroke="#474747"></path></svg>news</li>
+        <li class="add-list" (click)="showEventInput()"><svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M7.5 4v7M4 7.5h7m-3.5 7a7 7 0 110-14 7 7 0 010 14z" stroke="#474747"></path></svg>event</li>
+        <li class="add-list" (click)="showImportantInput()"><svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M7.5 4v7M4 7.5h7m-3.5 7a7 7 0 110-14 7 7 0 010 14z" stroke="#474747"></path></svg>important</li>
+    </ul>
+    <ul>
+        <li><a href="/">Screen view</a></li>
+        <li><a href="">Favourites</a></li>
+        <li><a href="">History</a></li>
+        <li><a href="">Images</a></li>
+        <li><a href="">Extra</a></li>
+    </ul>
+
+</div>
+<div class="main-content">
+    <app-news-input *ngIf="isNewsInputVisible"></app-news-input>
+    <app-event-input *ngIf="isEventInputVisible"></app-event-input>
+    <app-important-input *ngIf="isImportantInputVisible"></app-important-input>
+</div>
+</div>

@@ -31,7 +31,8 @@ export class EventInputComponent implements OnInit {
   eventInputForm = this.formBuilder.group({
     title: [''],
     created_at: [''],
-    description: [''],
+    time: [''],
+    illustration: ['']
     // file: [''],
   });
 
