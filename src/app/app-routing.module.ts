@@ -8,6 +8,7 @@ import { NewScreenViewComponent } from './new-screen-view/new-screen-view.compon
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
+  { path: '', component: ScreenViewComponent },
   {
     path: 'screen',
     component: ScreenViewComponent,
@@ -32,7 +33,7 @@ const routes: Routes = [
     path: 'important',
     component: ImportantInputComponent,
   },
-  { path: '', component: ScreenViewComponent },
+
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: '**', component: ScreenViewComponent },
 ];
