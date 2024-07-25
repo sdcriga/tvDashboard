@@ -7,7 +7,7 @@
     "side header"
     "side main";
   .header {
-    background-color: #eef3f6;
+    background-color: white;
     grid-area: header;
   }
   .sidebar {
@@ -17,12 +17,23 @@
     flex-direction: column;
     align-items: center;
     gap: 3rem;
-    .user-icon {
+    .profile-info-container{
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+align-items: center;
+         .user-icon {
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background-color: #086adb;
+      background-color:  white;
       margin-top: 3rem;
+    }
+    p{
+      color: #001155;
+      font-family: SwissFont;
+      font-size: 0.6rem;
+    }
     }
     .add-container {
         .add-list {
@@ -41,13 +52,13 @@
       list-style: none;
       padding: 0;
       li {
-        padding: 1rem;
+        padding: 0.5rem;
+        margin: 0.5rem;
+        border-radius: 0.8px;
         cursor: pointer;
-        a{
-            text-decoration: none;
-            color: #001155;
-            font-family: SwissFont;
-        }
+        text-decoration: none;
+        color: #001155;
+        font-family: SwissFont;
       }
     }
 
@@ -55,5 +66,46 @@
   .main-content {
     background-color: white;
     grid-area: main;
+  }
+}
+li:hover,
+li.active {
+  color: #0C847E !important;
+  background-color: #e7f3f2;
+  font-family: SwissFontTwo !important;
+  border-radius: 4px !important;
+}
+
+.mobile{
+  display: none;
+}
+.full-view{
+  display: block;
+}
+
+@media only screen and (max-width: 400px) {
+  .dashboard-container {
+    grid-template-columns: 50px 1fr;
+  }
+  li {
+    // padding: 0 !important;
+    margin: 0 !important;
+  }
+  .sidebar {
+    gap: 2rem !important;
+  }
+  .mobile{
+display: block !important;
+  }
+  .full-view{
+    display: none !important;
+  }
+  .user-icon {
+    width: 25px !important;
+    height: 25px !important;
+    margin-top: 2rem !important;
+  }
+  p{
+    font-size: 0.3rem !important;
   }
 }

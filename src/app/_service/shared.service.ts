@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { BelowInfo } from '../_interface/belowinfo';
+import { Important } from '../_interface/important';
 import { Events } from '../_interface/events';
 import { News } from '../_interface/news';
 
@@ -9,15 +9,15 @@ import { News } from '../_interface/news';
   providedIn: 'root',
 })
 export class SharedService {
-  private importantDataSource = new BehaviorSubject<BelowInfo | null>(null);
+  private importantDataSource = new BehaviorSubject<Important | null>(null);
   private mainDataSource = new BehaviorSubject<News | null>(null);
   private eventDataSource = new BehaviorSubject<Events[] | null>(null);
 
-  sharedDataObject: BelowInfo[] | null = null;
+  sharedDataObject: Important[] | null = null;
 
   constructor() {}
 
-  updateImportantData(data: BelowInfo) {
+  updateImportantData(data: Important) {
     this.importantDataSource.next(data);
   }
   updateMaintData(data: News) {
@@ -27,7 +27,7 @@ export class SharedService {
     this.eventDataSource.next(data);
   }
 
-  updateImportantStorageData(data: BelowInfo) {
+  updateImportantStorageData(data: Important) {
     localStorage.setItem('importantData', JSON.stringify(data));
   }
   updateMainStorageData(data: News) {
@@ -42,7 +42,7 @@ export class SharedService {
     localStorage.setItem('eventData', JSON.stringify(eventDataArray));
   }
 
-  getImportantSectionData(): BelowInfo | null {
+  getImportantSectionData(): Important | null {
     const data = localStorage.getItem('importantData');
     return data ? JSON.parse(data) : null;
   }

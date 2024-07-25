@@ -1,0 +1,16 @@
+.extra-container {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 8rem 15rem;
+    width: 100%;
+    box-sizing: border-box;
+    h1 {
+      position: absolute;
+      top: 3rem;
+      left: 3rem;
+      font-family: SwissFontTwo;
+      font-size: 1.7rem;
+      color: #333333;
+    }
+}

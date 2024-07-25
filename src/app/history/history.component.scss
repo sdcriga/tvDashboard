@@ -1,0 +1,293 @@
+.history-container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 8rem 15rem;
+  width: 100%;
+  box-sizing: border-box;
+  h1 {
+    position: absolute;
+    top: 3rem;
+    left: 3rem;
+    font-family: SwissFontTwo;
+    font-size: 1.7rem;
+    color: #333333;
+  }
+  .buttons-wrap {
+    display: flex;
+    gap: 1rem;
+    button {
+      font-family: SwissFontTwo;
+      font-size: 1.2rem;
+      border-radius: 8px;
+      padding: 0.7rem;
+      border: 0.8px solid #11aaff;
+      background-color: white;
+      color: #5c5c5c;
+      width: 50%;
+      cursor: pointer;
+      transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out,
+        border 0.1s ease-in-out;
+    }
+    button.selected {
+      border: 1.5px solid #086adb;
+      color: #086adb;
+      //   background-color: #F8FAFB;
+      background-color: #eef3f6;
+    }
+  }
+  .news-container {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    border: 0.8px solid #858585;
+    border-radius: 8px;
+    .news-list-wrap {
+      border-bottom: 0.8px solid #858585;
+      padding: 1rem;
+      transition: background-color 0.1s ease-in-out;
+      .news-element {
+        display: flex;
+        justify-content: space-between;
+        justify-items: baseline;
+        .news-content-wrap {
+          .news-title {
+            font-family: SwissFontTwo;
+            font-size: 1.3rem;
+            color: #001155;
+          }
+          .news-description {
+            p {
+              font-family: SwissFont;
+              padding: 1rem;
+              color: #333333;
+            }
+          }
+        }
+        .icons-wrap {
+          display: flex;
+          gap: 1rem;
+          align-items: center;
+          justify-content: center;
+          svg {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+  .events-container{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    border: 0.8px solid #858585;
+    border-radius: 8px;
+    .events-list-wrap {
+      border-bottom: 0.8px solid #858585;
+      padding: 1rem;
+      transition: background-color 0.1s ease-in-out;
+      .events-element {
+        display: flex;
+        justify-content: space-between;
+        justify-items: baseline;
+        .events-content-wrap {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            justify-content: center;
+          .event-title {
+            font-family: SwissFontTwo;
+            font-size: 1.3rem;
+            color: #001155;
+            padding-right: 1rem;
+          }
+          .event-time{
+            font-family: SwissFontTwo;
+            font-size: 1rem;
+            color:  #666666;
+          }
+        }
+        .icons-wrap {
+          display: flex;
+          gap: 1rem;
+          align-items: center;
+          justify-content: center;
+          svg {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+  .important-container {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    border: 0.8px solid #858585;
+    border-radius: 8px;
+    .important-list-wrap {
+      border-bottom: 0.8px solid #858585;
+      padding: 1rem;
+      .important-content-wrap {
+        display: flex;
+        justify-content: space-between;
+        p {
+          font-family: SwissFontTwo;
+          font-size: 1.3rem;
+          color: #001155;
+        }
+        .action-wrap {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
+          svg {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+
+.active-banner {
+  padding: 0.3rem 0.5rem;
+  border-radius: 8px;
+  background-color: #e8f3e7;
+  color: #5d615c;
+  font-family: SwissFontTwo;
+  cursor: pointer;
+  transition: color, background-color 0.8s ease;
+}
+.active-banner:hover{
+    background-color: #dae2d9;
+    color: #4a4e4a;
+}
+
+.inactive-banner {
+    padding: 0.3rem 0.5rem;
+    border-radius: 8px;
+    background-color: #f9d1df;
+    color: #7d6970;
+    font-family: SwissFontTwo;
+    cursor: pointer;
+    transition: color, background-color 0.8s ease;
+  }
+
+  .inactive-banner:hover {
+    background-color: #e0bcc9;
+color: #a61a66;
+  }
+
+
+.important-list-wrap:last-child, .news-list-wrap:last-child, .events-list-wrap:last-child {
+  border-bottom: none !important;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.important-list-wrap:first-child, .news-list-wrap:first-child, .events-list-wrap:first-child {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+      }
+
+.news-background {
+  //   background-color: #f8fafb;
+  background-color: #fcfcfc;
+  border-radius: 8px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.news-list-wrap:hover, .important-list-wrap:hover, .events-list-wrap:hover {
+  background-color: #fcfcfc;
+}
+
+.icon-bin path, .icon-edit path {
+    transition: stroke 0.3s; 
+  }
+
+.icon-bin:hover path{
+    stroke: #b65b4d;
+    
+}
+
+.icon {
+    transition: transform 0.3s ease;
+}
+
+.icon:hover {
+    transform: scale(1.05) !important;
+}
+
+.clicked {
+    animation: click-scale 0.7s ease-in-out !important;
+  }
+  @keyframes click-scale {
+    0% {
+      transform: scale(1);
+    }
+    40% {
+      transform: scale(1.01); 
+    }
+    80%{
+        transform: scale(0.94);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+
+
+  @media only screen and (max-width: 400px) {
+    #mobile{
+      display: block;
+    }
+    .history-container {
+      padding: 3rem 1rem !important;
+    }
+   h1{
+    top: 1rem !important;
+    left: 1.5rem !important;
+    font-family: SwissFontTwo;
+    font-size: 1rem !important;
+   }
+   .buttons-wrap {
+    display: flex;
+    gap: 0.5rem !important;
+    button {
+      font-family: SwissFont !important;
+      font-size: 0.8rem !important;
+      border-radius: 8px;
+      padding: 0.3rem 1.5rem !important;
+      width: 80% !important;
+      transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out,
+      border 0.1s ease-in-out;
+    }
+    button.selected {
+      border: 1.2px solid #086adb !important;
+      // color: #086adb;
+      // background-color: #eef3f6;
+    }
+  }
+  .important-list-wrap {
+    padding: 0.5rem !important;
+    p {
+      font-family: SwissFontTwo;
+      font-size: 0.6rem !important;
+    }
+  }
+  .active-banner {
+    padding: 0.1rem 0.3rem !important;
+    border-radius: 4px !important;
+    font-family: SwissFontTwo;
+    font-size: 0.7rem !important;
+  }
+  .inactive-banner {
+      padding: 0.1rem 0.3rem !important;
+      border-radius: 4px !important;
+      font-family: SwissFontTwo;
+      font-size: 0.7rem !important;
+    }
+  }

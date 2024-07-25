@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { SharedService } from '../_service/shared.service';
 import { HttpClient } from '@angular/common/http';
 import { News } from '../_interface/news';
-import { DataSaveService } from '../_service/data-save.service';
+import { NewsService } from '../_service/news.service';
 
 @Component({
   selector: 'app-news-input',
@@ -11,7 +11,7 @@ import { DataSaveService } from '../_service/data-save.service';
   styleUrls: ['./news-input.component.scss'],
 })
 export class NewsInputComponent implements OnInit {
-  dataMainObject: News | null = null;
+  dataNewsObject: News | null = null;
   file: File | null = null;
   fileName = '';
 
@@ -19,12 +19,12 @@ export class NewsInputComponent implements OnInit {
     private formBuilder: FormBuilder,
     private sharedService: SharedService,
     private http: HttpClient,
-    public dataService: DataSaveService
+    public newsService: NewsService
   ) {}
 
   ngOnInit() {
    // this.dataMainObject = this.sharedService.getMainSectionData();
-   this.dataService.getAndStoreNewsObject();
+   this.newsService.getAndStoreNewsObject();
   }
 
   newsInputForm = this.formBuilder.group({
@@ -36,12 +36,12 @@ export class NewsInputComponent implements OnInit {
 
   onSubmit(): void {
     const mainInfo: News = this.newsInputForm.value as News;
-    this.dataService.newMain$(mainInfo).subscribe({
+    this.newsService.newNews$(mainInfo).subscribe({
       next: (response) => {
-        console.log('MainInfo created successfully:', response);
+        console.log('News created successfully:', response);
       },
       error: (error) => {
-        console.error('Failed to create MainInfo:', error);
+        console.error('Failed to create news:', error);
       }
     });
   }

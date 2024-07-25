@@ -1,0 +1,70 @@
+<div class="favourites-container">
+    <h1>Favourites</h1>
+    <div class="buttons-wrap">
+        <button 
+        *ngFor="let button of buttons" 
+        [ngClass]="{'selected': selectedButton === button}"
+        (click)="selectButton(button)"
+      >
+        {{ button }}
+      </button>
+</div>
+
+    <div class="news-container" *ngIf="newsFavouriteData && newsFavouriteData.length > 0 && this.selectedButton == 'News'" >
+      <div class="news-list-wrap" *ngFor="let news of newsFavouriteData | reverse let i = index" [ngClass]="{'news-background': news.toggled}">
+        <!-- <div *ngIf="i !== 0" class="info-item"> -->
+
+        <div class="news-element" >
+             <div class="news-content-wrap">
+          <p class="news-title">{{ news.title | capitalize : "sentenceCase"}}</p>
+
+       <div class="news-description" [@collapse]="news.collapsed">
+          <p *ngIf="news.toggled">{{ news.description }}</p>
+        </div>
+          </div>
+          <div class="icons-wrap">
+            <svg class="icon icon-plus" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M7.5 4v7M4 7.5h7m-3.5 7a7 7 0 110-14 7 7 0 010 14z" stroke="#008E00"></path></svg>
+            <svg class="icon icon-bin" (click)="onNewsDelete(news.newsId)" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15" *ngIf="!news.toggled"><path d="M4.5 3V1.5a1 1 0 011-1h4a1 1 0 011 1V3M0 3.5h15m-13.5 0v10a1 1 0 001 1h10a1 1 0 001-1v-10M7.5 7v5m-3-3v3m6-3v3" stroke="#cb8a80"></path></svg>
+            <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16" (click)="toggleIcon(news)" *ngIf="!news.toggled"><path d="M14 5l-6.5 7L1 5" stroke="#086adb" stroke-linecap="square"
+                ></path></svg>
+              <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16"  (click)="toggleIcon(news)" *ngIf="news.toggled"><path d="M1 10l6.5-7 6.5 7" stroke="#086adb" stroke-linecap="square"
+               ></path></svg>
+</div>
+          </div>
+      <!-- </div> -->
+      </div>
+  </div>
+
+
+  <div class="events-container" *ngIf="eventsFavouriteData && eventsFavouriteData.length > 0 && this.selectedButton == 'Events'" >
+    <div class="event-list-wrap" *ngFor="let event of eventsFavouriteData | reverse let i = index" [ngClass]="{'news-background': event.toggled}">
+      <div class="event-element" >
+           <div class="event-content-wrap">
+        <p class="event-title">{{ event.title | capitalize : "sentenceCase"}}</p>
+        </div>
+        <div class="icons-wrap">
+          <svg class="icon icon-plus" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M7.5 4v7M4 7.5h7m-3.5 7a7 7 0 110-14 7 7 0 010 14z" stroke="#008E00"></path></svg>
+          <svg class="icon icon-bin" (click)="onEventDelete(event.eventId)" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15" *ngIf="!event.toggled"><path d="M4.5 3V1.5a1 1 0 011-1h4a1 1 0 011 1V3M0 3.5h15m-13.5 0v10a1 1 0 001 1h10a1 1 0 001-1v-10M7.5 7v5m-3-3v3m6-3v3" stroke="#cb8a80"></path></svg>
+</div>
+        </div>
+    </div>
+</div>
+
+
+  <div class="important-container" *ngIf="importantFavouriteData && importantFavouriteData.length > 0 && this.selectedButton == 'Important'" >
+    <div class="important-list-wrap" *ngFor="let important of importantFavouriteData | reverse let i = index" [ngClass]="{'news-background': important.toggled}">
+
+          <div class="important-content-wrap">
+
+        <p>{{ important.description | capitalize : "sentenceCase"}}</p>
+<div class="action-wrap">
+    <svg class="icon icon-plus" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M7.5 4v7M4 7.5h7m-3.5 7a7 7 0 110-14 7 7 0 010 14z" stroke="#008E00"></path></svg>
+
+    <svg class="icon-bin" (click)="onImportantDelete(important.importantId)" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15" *ngIf="!important.toggled"><path d="M4.5 3V1.5a1 1 0 011-1h4a1 1 0 011 1V3M0 3.5h15m-13.5 0v10a1 1 0 001 1h10a1 1 0 001-1v-10M7.5 7v5m-3-3v3m6-3v3" stroke="#cb8a80"></path></svg>
+        </div> 
+</div>
+        <div>
+</div>
+    </div>
+</div>
+</div>

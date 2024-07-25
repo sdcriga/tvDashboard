@@ -1,20 +1,15 @@
+// .base{
+//   height: 100%;
+//   margin: 0;
+// }
 .screen-view-container {
-  height: 100vh;
+  // height: 100vh;
+  min-height: 200vh;
   // background-color: #EEF3F6;
   // background-color: #efefef;
   // background-image: linear-gradient(to right bottom, #001155, #08206c, #0f3085, #13419e, #1352b8, #1b56bf, #2259c5, #285dcc, #3354c1, #3a4bb5, #3f41aa, #42389e);
   // background: linear-gradient(135deg,  #42389E, #001155, #11AAFF, #7F2879);
   background: linear-gradient(135deg,  #42389E, #001155, #086ADB, #7F2879);
-  button {
-    position: absolute;
-    background: transparent;
-    border: 1px solid;
-    top: 0.1em;
-    right: 3em;
-    a {
-      text-decoration: none;
-    }
-  }
   .news-events-wrap {
     display: grid;
     grid-template-columns: 65% 35%;
@@ -22,16 +17,15 @@
     .news-info-container {
       position: relative;
       padding-right: 3em;
+
       .news-title {
         display: flex;
         align-items: baseline;
         gap: 2em;
         padding-left: 0.8rem;
-        .news-title {
-          font-size: 3rem;
-          color: white;
-          font-family: SwissFontTwo;
-        }
+        font-size: 3rem;
+        color: white;
+        font-family: SwissFontTwo;
         .date-title{
           font-size: 1.8rem;
           color: white;
@@ -96,8 +90,6 @@
         display: flex;
         flex-direction: column;
         gap: 0.7em;
-        // width: 30em;
-        // height: 35em;
         .event-list-container {
           display: flex;
           flex-direction: column;
@@ -141,16 +133,21 @@
     transform: translate(-50%, -50%);
     width: 100%;
     height: 5em;
-    // border: solid 1px #f8cfd3;
-     border: solid 1px  #DDE3E7;
     bottom: -2.5em;
     text-align: center;
-    padding-top: 1em;
-    background-color:  #DDE3E7;
+    padding-top: 1.3em;
+    // border: 2px solid black;
+    // padding-bottom: 1em;
+    // background-color:  #DDE3E7;
+    // background-color: #e6cec6;
+    // background-color: #d85762;
+    background-color: #e8c4c4;
     .marquee{
       font-family: SwissFontBold;
       font-size: 34px;
-      color: #DD1122;
+      // color: #DD1122;
+      color: #c70f1f;
+      // color: #8f2e2e;
     }
   }
 }
@@ -175,6 +172,99 @@
 
 .dot.active {
   background-color: #11AAFF;
+}
+
+@media only screen and (max-width: 435px) {
+  .screen-view-container {
+    height: 100vh;
+  }
+  .news-info-container {
+    padding-right: 0 !important;
+  }
+  .news-events-wrap {
+    display: grid;
+    grid-template-columns: 1fr !important;
+    padding: 1rem !important;
+  }
+
+  .important-info-container {
+    height: 4rem !important;
+    top: 6rem !important;
+    text-align: center;
+    padding-top: 1rem !important;
+  }
+  .news-title {
+    gap: 1rem !important;
+    padding-left: 0.8rem;
+    font-size: 1.5rem !important;
+    padding-bottom: 0.2rem;
+    .date-title{
+      font-size: 1rem !important;
+    }
+  }
+  .news-content-wrap {
+    height: 500px;
+    .news-img {
+      width: 100%;
+      height: 30% !important;
+    }
+    h1{
+      font-family: SwissFontTwo;
+      font-size: 20px !important;
+      padding: 0 0 !important;
+      margin: 0 !important;
+    }
+    p{
+      margin: 0.2rem !important;
+      padding: 0 6px !important;
+      font-size: 13px !important;
+    }
+  }
+  .events-title-wrap {
+
+    .event-title {
+      font-size: 1.5rem !important;
+      padding: 0.5rem 0 0.5rem 0;
+    }
+    .event-info-container {
+      border-radius: 14px;
+      padding: 1.5em;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7em;
+      .event-list-container {
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        .event-title-wrap {
+          display: flex;
+          gap: 0.7em;
+          img {
+            width: 130px;
+            height: 80px;
+            border-radius: 8px;
+          }
+          .event-time-wrap {
+            display: inline-block;
+            padding: 0.2rem 0.5rem !important;
+            border-radius: 8px;
+            .event-time {
+              font-size: 0.5rem !important;
+              padding: 0 !important;
+            }
+          }
+          h3 {
+            padding-top: 0.1em;
+            font-size: 0.8rem !important;
+          }
+        }
+      }
+    }
+  }
+  
+}
+
+@media only screen and (max-width: 0px) {
 }
 
 

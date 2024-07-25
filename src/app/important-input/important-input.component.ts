@@ -1,8 +1,9 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { DataSaveService } from '../_service/data-save.service';
-import { BelowInfo } from '../_interface/belowinfo';
-import { SavedBelowInfo } from '../_interface/savedinfo';
+import { Important } from '../_interface/important';
+import { FavouriteImportant } from '../_interface/favourite-important';
+import { ImportantService } from '../_service/important.service';
 
 @Component({
   selector: 'app-important-input',
@@ -10,8 +11,8 @@ import { SavedBelowInfo } from '../_interface/savedinfo';
   styleUrls: ['./important-input.component.scss'],
 })
 export class ImportantInputComponent implements OnInit {
-  dataObject: BelowInfo[] | null = null;
-  favouritesDataObject: SavedBelowInfo[] | null = null;
+  dataObject: Important[] | null = null;
+  favouritesDataObject: FavouriteImportant[] | null = null;
   currentInformationText = "Currently no information created";
   emptyDescriptionErrorMessage: string = "";
   editMode: boolean = false;
@@ -19,13 +20,14 @@ export class ImportantInputComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public dataService: DataSaveService
+    public dataService: DataSaveService,
+    public importantService: ImportantService
   ) {}
 
   ngOnInit() {
     this.editMode = false;
-    this.dataService.getAndStoreBelowObject();
-    this.dataService.getAndStoreSavedBelowObject();
+    this.importantService.getAndStoreImportantObject();
+    this.importantService.getAndStoreImportantObjectAsFavourite();
   }
 
   importantInputForm = this.formBuilder.group({
@@ -33,13 +35,13 @@ export class ImportantInputComponent implements OnInit {
   });
 
   onSubmit(): void {
-    const belowInfo: BelowInfo = this.importantInputForm.value as BelowInfo;
-    this.dataService.newImportant$(belowInfo).subscribe({
+    const belowInfo: Important = this.importantInputForm.value as Important;
+    this.importantService.newImportant$(belowInfo).subscribe({
       next: (response) => {
-        console.log('BelowInfo created successfully:', response);
+        console.log('Important created successfully:', response);
       },
       error: (error) => {
-        console.error('Failed to create BelowInfo:', error);
+        console.error('Failed to create Important:', error);
       }
     });
   }
@@ -47,35 +49,35 @@ export class ImportantInputComponent implements OnInit {
   onSave(description: string, id: number): void {
     this.isButtonExpanded = true;
     setTimeout(() => this.isButtonExpanded= false, 200); 
-    const belowInfo: BelowInfo = { description: description } as BelowInfo;
-    this.dataService.saveImportant$(belowInfo, id).subscribe({
+    const important: Important = { description: description } as Important;
+    this.importantService.saveImportantToFavourites$(important, id).subscribe({
       next: (response) => {
-        console.log('BelowInfo created successfully:', response);
+        console.log('Important created successfully:', response);
       },
       error: (error) => {
-        console.error('Failed to create BelowInfo:', error);
+        console.error('Failed to create Important:', error);
       }
     });
   }
 
   onDelete(id: number): void {
-    this.dataService.deleteInformation$(id).subscribe({
+    this.importantService.deleteImportant$(id).subscribe({
         next: (response) => {
-            console.log('BelowInfo deleted successfully:', response);   
+            console.log('Important deleted successfully:', response);   
         },
         error: (error) => {
-            console.error('Failed to delete BelowInfo:', error);
+            console.error('Failed to delete Important:', error);
         }
     });
 }
 
 onFavouriteDelete(id: number): void {
-  this.dataService.deleteFavouriteInformation$(id).subscribe({
+  this.importantService.deleteFavouriteImportant$(id).subscribe({
       next: (response) => {
-          console.log('BelowInfo deleted successfully:', response);   
+          console.log('Important deleted successfully:', response);   
       },
       error: (error) => {
-          console.error('Failed to delete BelowInfo:', error);
+          console.error('Failed to delete Important:', error);
       }
   });
 }
@@ -85,7 +87,7 @@ onEdit(id: number, description: string): void {
     this.emptyDescriptionErrorMessage = "Description cannot be empty!";  
     return;
 }
-  this.dataService.updateInformation$(id, description).subscribe({
+  this.importantService.updateInformation$(id, description).subscribe({
       next: (response) => {
           console.log('Information edited successfully:', response); 
           this.editMode = false;  

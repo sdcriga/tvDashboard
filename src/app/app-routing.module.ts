@@ -6,6 +6,7 @@ import { ImportantInputComponent } from './important-input/important-input.compo
 import { ScreenViewComponent } from './screen-view/screen-view.component';
 import { NewScreenViewComponent } from './new-screen-view/new-screen-view.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', component: ScreenViewComponent },
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'new-screen',
     component: NewScreenViewComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
   },
   {
     path: 'dashboard',

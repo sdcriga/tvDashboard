@@ -1,0 +1,25 @@
+<div class="images-container">
+    <h1>Images</h1>
+    <p class="title-extension-text">Quick options. Click on the image to copy the link which <br id="mobile"> You can use to create a new post.</p>
+    <div class="news-events-wrap">
+    <div class="news-container">
+        <h2>News images <span class="news-side-note">(displayed will be middle of the image)</span></h2>
+<div class="news-img">
+    <div class="image-container" *ngFor="let image of newsImages">
+        <img [src]="image" alt="" appCopyLink [copyText]="image">
+        <div class="overlay">copy</div>
+      </div>
+</div>
+    </div>
+    <div class="events-container">
+        <h2>Event images</h2>
+        <div class="event-img">
+            <div class="image-container" *ngFor="let image of eventImages">
+                <img [src]="image" alt="" appCopyLink [copyText]="image">
+                <div class="overlay">copy</div>
+              </div>
+        </div>
+    </div>
+    </div>
+</div>
+

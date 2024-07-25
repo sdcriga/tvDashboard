@@ -3,38 +3,22 @@ import { Injectable } from '@angular/core';
 
 import { CustomHttpResponse } from '../_interface/customhttp';
 import { Observable, catchError, tap, throwError } from 'rxjs';
-import { BelowInfo } from '../_interface/belowinfo';
-import { SavedBelowInfo } from '../_interface/savedinfo';
+import { Important } from '../_interface/important';
+import { FavouriteImportant } from '../_interface/favourite-important';
 import { Events } from '../_interface/events';
-import { News } from '../_interface/news';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataSaveService {
- private readonly server: string = 'http://officescreen.local:8080';
-//  private readonly server: string = 'http://localhost:8080';
+//  private readonly server: string = 'http://officescreen.local:8080';
+ private readonly server: string = 'http://localhost:8080';
 
- dataObject: BelowInfo[] | null = null;
+ dataObject: Important[] | null = null;
  dataEventsObject: Events[] | null = null;
- dataNewsObject: News[] | null = null;
- favouritesDataObject: SavedBelowInfo[] | null = null;
+ favouritesDataObject: FavouriteImportant[] | null = null;
 
   constructor(private http: HttpClient) {}
-  
-
-  newImportant$(belowInfo: BelowInfo): Observable<CustomHttpResponse<BelowInfo>> {
-    const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    }
-    return this.http.post<CustomHttpResponse<BelowInfo>>(
-      `${this.server}/api/create/important`,
-      belowInfo, httpOptions
-    ).pipe(
-      tap(console.log),
-      catchError(this.handleError)
-    );
-  }
 
   newEvent$(event: Events): Observable<CustomHttpResponse<Events>> {
     const httpOptions = {
@@ -45,45 +29,6 @@ export class DataSaveService {
       event, httpOptions
     ).pipe(
       tap(console.log),
-      catchError(this.handleError)
-    );
-  }
-
-  newMain$(main: News): Observable<CustomHttpResponse<News>> {
-    const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    }
-    return this.http.post<CustomHttpResponse<News>>(
-      `${this.server}/api/create/news`,
-      main, httpOptions
-    ).pipe(
-      tap(console.log),
-      catchError(this.handleError)
-    );
-  }
-
-  saveImportant$(belowInfo: BelowInfo, id: number): Observable<CustomHttpResponse<BelowInfo>> {
-    const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    }
-    return this.http.post<CustomHttpResponse<BelowInfo>>(
-      `${this.server}/api/save/important/${id}`,
-      belowInfo, httpOptions
-    ).pipe(
-      tap(console.log),
-      catchError(this.handleError)
-    );
-  }
-
-
-  getAllImportantInformation$(): Observable<CustomHttpResponse<BelowInfo[]>> {
-    const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    };
-    return this.http.get<CustomHttpResponse<BelowInfo[]>>(
-      `${this.server}/api/important`,
-      httpOptions
-    ).pipe(
       catchError(this.handleError)
     );
   }
@@ -100,81 +45,6 @@ export class DataSaveService {
     );
   }
 
-
-  getAllMainInformation$(): Observable<CustomHttpResponse<News[]>> {
-    const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    };
-    return this.http.get<CustomHttpResponse<News[]>>(
-      `${this.server}/api/news`,
-      httpOptions
-    ).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  getAllSavedImportantInformation$(): Observable<CustomHttpResponse<SavedBelowInfo[]>> {
-    const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    };
-    return this.http.get<CustomHttpResponse<SavedBelowInfo[]>>(
-      `${this.server}/api/saved/important`,
-      httpOptions
-    ).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-
-  deleteInformation$(id: number){
-    const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    };
-    return this.http.delete<CustomHttpResponse<BelowInfo>>(
-      `${this.server}/api/delete/important/${id}`,
-      httpOptions
-    ).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  deleteFavouriteInformation$(id: number){
-    const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    };
-    return this.http.delete<CustomHttpResponse<BelowInfo>>(
-      `${this.server}/api/delete/favourite/${id}`,
-      httpOptions
-    ).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  updateInformation$ = (id: number, description: String) =>
-  <Observable<CustomHttpResponse<BelowInfo>>>(
-    this.http
-      .patch<CustomHttpResponse<BelowInfo>>(
-        `${this.server}/api/update/important/${id}`,
-        description
-      )
-      .pipe(tap(console.log), catchError(this.handleError))
-  );
-
-
-  getAndStoreBelowObject(): void {
-    this.getAllImportantInformation$().subscribe({
-      next: (response) => {
-        console.log('BelowInfo received:', response);
-        this.dataObject = response.data["important"]; 
-        console.log('BelowInfo object:', this.dataObject);
-      },
-      error: (error) => {
-        console.error('Failed to create BelowInfo:', error);
-      }
-    });
-  }
-
-
   getAndStoreEventObject(): void {
     this.getAllEventInformation$().subscribe({
       next: (response) => {
@@ -187,32 +57,6 @@ export class DataSaveService {
       }
     });
   }
-
-  getAndStoreSavedBelowObject(): void {
-    this.getAllSavedImportantInformation$().subscribe({
-      next: (response) => {
-        this.favouritesDataObject = response.data["saved"]; 
-      },
-      error: (error) => {
-        console.error('Failed to create BelowInfo:', error);
-      }
-    });
-  }
-
-
-  getAndStoreNewsObject(): void {
-    this.getAllMainInformation$().subscribe({
-      next: (response) => {
-        console.log('Main list received:', response);
-        this.dataNewsObject = response.data["news"]; 
-        console.log('Main object:', this.dataNewsObject);
-      },
-      error: (error) => {
-        console.error('Failed to create Main:', error);
-      }
-    });
-  }
-
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.log(error);
@@ -229,6 +73,5 @@ export class DataSaveService {
     }
     return throwError(() => errorMessage);
   }
-
 
 }

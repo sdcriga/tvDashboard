@@ -1,20 +1,30 @@
+
+<ng-container *ngIf="profileState$ | async as state">
 <div class="dashboard-container">
 <div class="header">
-    <!-- <app-navbar></app-navbar> -->
 </div>
 <div class="sidebar">
-    <div class="user-icon"></div>
+    <div class="profile-info-container">
+    <svg class="user-icon" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="30" height="30"><path d="M3 13v.5h1V13H3zm8 0v.5h1V13h-1zm-7 0v-.5H3v.5h1zm2.5-3h2V9h-2v1zm4.5 2.5v.5h1v-.5h-1zM8.5 10a2.5 2.5 0 012.5 2.5h1A3.5 3.5 0 008.5 9v1zM4 12.5A2.5 2.5 0 016.5 10V9A3.5 3.5 0 003 12.5h1zM7.5 3A2.5 2.5 0 005 5.5h1A1.5 1.5 0 017.5 4V3zM10 5.5A2.5 2.5 0 007.5 3v1A1.5 1.5 0 019 5.5h1zM7.5 8A2.5 2.5 0 0010 5.5H9A1.5 1.5 0 017.5 7v1zm0-1A1.5 1.5 0 016 5.5H5A2.5 2.5 0 007.5 8V7zm0 7A6.5 6.5 0 011 7.5H0A7.5 7.5 0 007.5 15v-1zM14 7.5A6.5 6.5 0 017.5 14v1A7.5 7.5 0 0015 7.5h-1zM7.5 1A6.5 6.5 0 0114 7.5h1A7.5 7.5 0 007.5 0v1zm0-1A7.5 7.5 0 000 7.5h1A6.5 6.5 0 017.5 1V0z" fill="#06423f"></path></svg>
+    <p>{{state.data.user.username | uppercase}}</p>
+    </div>
     <ul class="add-container">
-        <li class="add-list" (click)="showNewsInput()"><svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M7.5 4v7M4 7.5h7m-3.5 7a7 7 0 110-14 7 7 0 010 14z" stroke="#474747"></path></svg>news</li>
-        <li class="add-list" (click)="showEventInput()"><svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M7.5 4v7M4 7.5h7m-3.5 7a7 7 0 110-14 7 7 0 010 14z" stroke="#474747"></path></svg>event</li>
-        <li class="add-list" (click)="showImportantInput()"><svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M7.5 4v7M4 7.5h7m-3.5 7a7 7 0 110-14 7 7 0 010 14z" stroke="#474747"></path></svg>important</li>
+        <li class="mobile"><svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="17" height="17"><path d="M7.5 4v7M4 7.5h7m-3.5 7a7 7 0 110-14 7 7 0 010 14z" stroke="#1B8712"></path></svg></li>
+        <li class="add-list full-view" (click)="showNewsInput(); setActive('news')" [class.active]="activeItem === 'news'"><svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M7.5 4v7M4 7.5h7m-3.5 7a7 7 0 110-14 7 7 0 010 14z" stroke="#474747" [ngStyle]="{'stroke': activeItem === 'news' ? '#0a6a65' : '#474747'}"></path></svg>news</li>
+        <li class="add-list full-view" (click)="showEventInput(); setActive('event')" [class.active]="activeItem === 'event'"><svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M7.5 4v7M4 7.5h7m-3.5 7a7 7 0 110-14 7 7 0 010 14z" stroke="#474747"></path></svg>event</li>
+        <li class="add-list full-view" (click)="showImportantInput();  setActive('important')" [class.active]="activeItem === 'important'"><svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M7.5 4v7M4 7.5h7m-3.5 7a7 7 0 110-14 7 7 0 010 14z" stroke="#474747"></path></svg>important</li>
     </ul>
     <ul>
-        <li><a href="/">Screen view</a></li>
-        <li><a href="">Favourites</a></li>
-        <li><a href="">History</a></li>
-        <li><a href="">Images</a></li>
-        <li><a href="">Extra</a></li>
+        <li class="mobile"><svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="17" height="17"><path d="M4 14.5h7M.5 2.5v8a1 1 0 001 1h12a1 1 0 001-1v-8a1 1 0 00-1-1h-12a1 1 0 00-1 1z" stroke="currentColor"></path></svg></li>
+        <li class="full-view">Screen view</li>
+        <li class="mobile" (click)="showFavourites(); setActive('favourites')" [class.active]="activeItem === 'favourites'"><svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path d="M7.5 9.804l.242-.437a.5.5 0 00-.484 0l.242.437zM5.337 11l-.494-.08a.5.5 0 00.736.518L5.337 11zm.413-2.533l.493.08a.5.5 0 00-.135-.429l-.358.35zM4 6.674l-.075-.495a.5.5 0 00-.283.844L4 6.673zm2.418-.37l.076.495a.5.5 0 00.377-.282l-.453-.213zM7.5 4l.453-.212a.5.5 0 00-.906 0L7.5 4zm1.082 2.304l-.453.213a.5.5 0 00.377.282l.076-.495zm2.418.37l.358.349a.5.5 0 00-.283-.844L11 6.674zM9.25 8.467l-.358-.349a.5.5 0 00-.135.43l.493-.08zM9.663 11l-.242.438a.5.5 0 00.736-.519L9.663 11zM7.258 9.367l-2.163 1.195.484.876 2.163-1.196-.484-.875zM5.83 11.08l.413-2.532-.986-.161-.414 2.532.987.162zm.278-2.962l-1.75-1.794-.716.699 1.75 1.793.716-.698zm-2.033-.95l2.419-.37-.151-.988-2.418.37.15.988zm2.796-.651l1.082-2.305-.906-.424-1.081 2.304.905.425zm.176-2.305L8.13 6.517l.905-.425-1.081-2.304-.906.424zM8.507 6.8l2.418.369.15-.989-2.418-.369-.15.989zm2.135-.475l-1.75 1.794.716.698 1.75-1.793-.716-.699zM8.757 8.548l.413 2.533.987-.162-.414-2.532-.986.16zm1.148 2.014L7.742 9.367l-.484.875 2.163 1.196.484-.876zM7.5 14A6.5 6.5 0 011 7.5H0A7.5 7.5 0 007.5 15v-1zM14 7.5A6.5 6.5 0 017.5 14v1A7.5 7.5 0 0015 7.5h-1zM7.5 1A6.5 6.5 0 0114 7.5h1A7.5 7.5 0 007.5 0v1zm0-1A7.5 7.5 0 000 7.5h1A6.5 6.5 0 017.5 1V0z" fill="currentColor"></path></svg></li>
+        <li class="full-view" (click)="showFavourites(); setActive('favourites')" [class.active]="activeItem === 'favourites'">Favourites</li>
+        <li class="mobile" (click)="showHistory(); setActive('history')" [class.active]="activeItem === 'history'"><svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path d="M2.5 12.399l.37-.336-.006-.007-.007-.007-.357.35zm1 1.101v.5H4v-.5h-.5zm3.5.982l.018-.5-.053 1 .035-.5zM7.5 7.5H7a.5.5 0 00.146.354L7.5 7.5zm6.5 0A6.5 6.5 0 017.5 14v1A7.5 7.5 0 0015 7.5h-1zM7.5 1A6.5 6.5 0 0114 7.5h1A7.5 7.5 0 007.5 0v1zm0-1A7.5 7.5 0 000 7.5h1A6.5 6.5 0 017.5 1V0zM2.857 12.049A6.477 6.477 0 011 7.5H0c0 2.043.818 3.897 2.143 5.249l.714-.7zm-.727.686l1 1.101.74-.672-1-1.101-.74.672zM7.5 14a6.62 6.62 0 01-.465-.016l-.07.997c.177.013.355.019.535.019v-1zm.018 0l-.5-.017-.036 1 .5.017.036-1zM7 3v4.5h1V3H7zm.146 4.854l3 3 .708-.708-3-3-.708.708zM0 14h3.5v-1H0v1zm4-.5V10H3v3.5h1z" fill="currentColor"></path></svg></li>
+        <li class="full-view" (click)="showHistory(); setActive('history')" [class.active]="activeItem === 'history'">History</li>
+        <li class="mobile" (click)="showImages(); setActive('images')" [class.active]="activeItem === 'images'"><svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="17" height="17"><path d="M10 3.5h1m3.5 5.993l-3-2.998-3 2.998-4-4.996L.5 9.5m1-9h12a1 1 0 011 1v12a1 1 0 01-1 1h-12a1 1 0 01-1-1v-12a1 1 0 011-1z" stroke="currentColor"></path></svg></li>
+        <li class="full-view" (click)="showImages(); setActive('images')" [class.active]="activeItem === 'images'">Images</li>
+        <li class="mobile" (click)="showExtra(); setActive('extra')" [class.active]="activeItem === 'extra'"><svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path d="M8 1V.5H7V1h1zM7 4.5V5h1v-.5H7zm1 6V10H7v.5h1zM7 14v.5h1V14H7zM4.5 7.995H5v-1h-.5v1zm-3.5-1H.5v1H1v-1zM14 8h.5V7H14v1zm-3.5-1.005H10v1h.5v-1zM7 1v3.5h1V1H7zm0 9.5V14h1v-3.5H7zM4.5 6.995H1v1h3.5v-1zM14 7l-3.5-.005v1L14 8V7zM2.147 2.854l3 3 .708-.708-3-3-.708.708zm10-.708l-3 3 .708.708 3-3-.708-.708zM2.854 12.854l3-3-.708-.708-3 3 .708.708zm6.292-3l3 3 .708-.708-3-3-.708.708z" fill="currentColor"></path></svg></li>
+        <li class="full-view" (click)="showExtra(); setActive('extra')" [class.active]="activeItem === 'extra'">Extra</li>
     </ul>
 
 </div>
@@ -22,5 +32,10 @@
     <app-news-input *ngIf="isNewsInputVisible"></app-news-input>
     <app-event-input *ngIf="isEventInputVisible"></app-event-input>
     <app-important-input *ngIf="isImportantInputVisible"></app-important-input>
+    <app-favourites *ngIf="isFavouritesVisible" [newsFavouriteData]="newsFavouriteDataObject" [importantFavouriteData]="importantFavouriteDataObject" [eventsFavouriteData]="eventsFavouriteDataObject"></app-favourites>
+    <app-history *ngIf="isHistoryVisible" [newsData]="newsDataObject" [importantData]="importantDataObject" [eventsData]="eventsDataObject"></app-history>
+    <app-images *ngIf="isImagesVisible"></app-images>
+    <app-extra *ngIf="isExtraVisible"></app-extra>
 </div>
 </div>
+</ng-container>

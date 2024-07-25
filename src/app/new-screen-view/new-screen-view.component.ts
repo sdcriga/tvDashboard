@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { Events } from '../_interface/events';
 import { News } from '../_interface/news';
-import { BelowInfo } from '../_interface/belowinfo';
+import { Important} from '../_interface/important';
 import { SharedService } from '../_service/shared.service';
 import { DataSaveService } from '../_service/data-save.service';
 import { EventColorService } from '../_service/event-color.service';
+import { NewsService } from '../_service/news.service';
+import { ImportantService } from '../_service/important.service';
 
 @Component({
   selector: 'app-new-screen-view',
@@ -16,15 +18,15 @@ export class NewScreenViewComponent {
   eventSectionObject: Events[] | null = null;
   mainSectionObject: News[] | null = null;
 
- dataObject: BelowInfo[] | null = null;
+ dataObject: Important[] | null = null;
 
-  constructor(private sharedService: SharedService, public dataService: DataSaveService, public colorService: EventColorService) {}
+  constructor(private sharedService: SharedService, public importantService: ImportantService, public dataService: DataSaveService, public newsService: NewsService, public colorService: EventColorService) {}
 
   ngOnInit() {
     this.eventSectionObject = this.sharedService.getEventSectionData();
-    this.dataService.getAndStoreBelowObject();
+    this.importantService.getAndStoreImportantObject();
     this.dataService.getAndStoreEventObject();
-    this.dataService.getAndStoreNewsObject();
+    this.newsService.getAndStoreNewsObject();
   }
 
   getColor(index: number): string {

@@ -1,0 +1,94 @@
+.login-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 8rem;
+  width: 100%;
+  box-sizing: border-box;
+  h1 {
+    position: relative;
+    font-family: SwissFont;
+    font-size: 1.2rem;
+    color: #333333;
+    text-align: left;
+    margin-top: 1.5rem;
+    width: 60%;
+    .screen-icon {
+      position: absolute;
+      bottom: 0.3rem;
+      margin-left: 0.4rem;
+    }
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    input {
+      padding: 0.7rem;
+      width: 60%;
+      box-sizing: border-box;
+    }
+    .username-input {
+      border: 1px solid #086adb;
+      border-radius: 8px;
+            margin-top: 1.3rem;
+    }
+    .password-input {
+      border: none;
+      border-radius: 8px;
+      width: 60%;
+
+    }
+    button {
+      padding: 0.7rem;
+      background-color: #086adb;
+      color: white;
+      width: 60%;
+      border: 1px solid #086adb;
+      border-radius: 8px;
+      box-sizing: border-box;
+      transition: background-color 0.3s ease;
+      margin-top: 1.3rem;
+    }
+    button:hover {
+      background-color: #0048cf;
+    }
+  }
+}
+
+.password-container {
+  position: relative;
+  border-radius: 8px;
+  border: 1px solid #086adb;
+  width: 60%;
+  margin-top: 1.3rem;
+}
+
+.password-container input[type="password"] {
+  width: 60%;
+  padding-right: 30px; /* Adjust the padding to make space for the icon */
+}
+
+.password-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+input:focus {
+  outline: none;
+}
+
+.error-message {
+    color: #d18680;
+    font-family: SwissFont;
+    font-size: 0.8rem;
+    text-align: left;
+    width: 60%;
+    margin-top: 0.5rem;
+  }

@@ -1,8 +1,5 @@
+<body>
 <div class="screen-view-container">
-  <!-- <button><a href="/news">ADD</a></button> -->
-  <!-- <div class="calendar">
-    <app-calendar></app-calendar>
-  </div> -->
 <div class="news-events-wrap">
   <div class="news-info-container">
 
@@ -10,15 +7,25 @@
   <h1 class="news-title">News</h1>   
   <h1 class="date-title">{{date | date: "EEEE, MMMM d, y"}}</h1> 
     </div>
-    <div class="points-wrap">
-    <div class="news-content-wrap" *ngIf="this.dataService.dataNewsObject && this.dataService.dataNewsObject.length > 0">
-      <img class="news-img" src="{{this.dataService.dataNewsObject[activeIndex].illustration}}" alt="">
-      <h1>{{this.dataService.dataNewsObject[activeIndex].title | capitalize : "sentenceCase"}}</h1>
-      <p>{{this.dataService.dataNewsObject[activeIndex].description}}</p>
+    <div *ngIf="this.newsService.dataNewsFilteredObject && this.newsService.dataNewsFilteredObject.length > 0">
+    <div class="points-wrap" *ngIf="this.newsService.dataNewsFilteredObject[activeIndex]">
+    <div class="news-content-wrap">
+      <img *ngIf="this.newsService.dataNewsFilteredObject[activeIndex]" class="news-img" src="{{this.newsService.dataNewsFilteredObject[activeIndex].illustration}}" alt="">
+      <h1 *ngIf="this.newsService.dataNewsFilteredObject[activeIndex]">{{this.newsService.dataNewsFilteredObject[activeIndex].title | capitalize : "sentenceCase"}}</h1>
+      <p *ngIf="this.newsService.dataNewsFilteredObject[activeIndex]">{{this.newsService.dataNewsFilteredObject[activeIndex].description}}</p>
       </div>
-
       </div>
-
+      </div>
+<!-- 
+      <div *ngIf="this.newsService.dataNewsObject && this.newsService.dataNewsObject.length > 0">
+        <div class="points-wrap" *ngFor="let news of this.newsService.dataNewsObject | filter: filter">
+        <div class="news-content-wrap" >
+          <img *ngIf="news.active" class="news-img" src="{{news.illustration}}" alt="">
+          <h1 *ngIf="news.active">{{news.title | capitalize : "sentenceCase"}}</h1>
+          <p *ngIf="news.active">{{news.description}}</p>
+          </div>
+          </div>
+          </div> -->
   </div>
 
     
@@ -33,13 +40,13 @@
       >
         <div class="event-title-wrap">
           <div>
-            <img src="{{event.illustration}}" alt="">
+            <img *ngIf="event.active" src="{{event.illustration}}" alt="">
           </div>
           <div>
-          <div class="event-time-wrap">
-          <p class="event-time">{{ event.created_at | date : "MMMM d" }}, {{ event.created_at | date : "yyyy"}} - {{event.time}}</p>
+          <div *ngIf="event.active" class="event-time-wrap">
+          <p class="event-time">{{ event.event_date | date : "MMMM d" }}, {{ event.event_date | date : "yyyy"}} - {{event.time}}</p>
 </div>
-          <h3>{{ event.title }}</h3>
+          <h3 *ngIf="event.active">{{ event.title }}</h3>
           </div>
         </div>
       </div>
@@ -51,9 +58,10 @@
   <div *ngFor="let item of dataService.dataNewsObject; let i = index" class="dot" [class.active]="i === activeIndex"></div>
 </div> -->
 
-  <div class="important-info-container" *ngIf="this.dataService.dataObject && this.dataService.dataObject.length > 0">
-      <marquee class="marquee" direction="right" scrolldelay="80" behavior="loop">{{ this.dataService.dataObject[this.dataService.dataObject.length - 1].description}}</marquee>
+  <div class="important-info-container" *ngIf="this.importantService.dataImportantFilteredObject && this.importantService.dataImportantFilteredObject.length > 0">
+      <marquee class="marquee" direction="left" scrolldelay="80" behavior="loop">{{ this.importantService.dataImportantFilteredObject[this.importantService.dataImportantFilteredObject.length - 1].description}} {{ this.importantService.dataImportantFilteredObject[this.importantService.dataImportantFilteredObject.length - 1].description}} {{ this.importantService.dataImportantFilteredObject[this.importantService.dataImportantFilteredObject.length - 1].description}}</marquee>
   </div>
   
 
 </div>
+</body>

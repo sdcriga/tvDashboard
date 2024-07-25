@@ -1,8 +1,7 @@
 <div class="event-container">
-  <div class="event-wrap">
     <form (ngSubmit)="onSubmit()" [formGroup]="eventInputForm">
       <input type="text" placeholder="Title" formControlName="title" />
-      <input type="date" placeholder="Date" formControlName="created_at" />
+      <input type="date" placeholder="Date" formControlName="event_date" />
       <input type="time" name="" id="" formControlName="time">
       <input
       type="text"
@@ -11,10 +10,10 @@
       name="illustration"
       id="illustration"
     />
-      <input type="submit" value="Add" />
+    <button type="submit">Add</button>
     </form>
   </div>
-  <div class="event-info-wrap">
+  <!-- <div class="event-info-wrap">
     <h1>Current Events</h1>
     <div class="event-list">
       <p>Title</p>
@@ -26,8 +25,5 @@
       <button>Delete</button>
       <button>Copy</button>
     </div>
-  </div>
-</div>
-<div class="test-a">
-  <a href="/">Main screen</a>
-</div>
+  </div> -->
+

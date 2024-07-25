@@ -1,6 +1,4 @@
-<!-- <app-navbar></app-navbar> -->
-<div>
-  <div class="main-wrap">
+<div class="news-container">
     <form (ngSubmit)="onSubmit()" [formGroup]="newsInputForm">
       <input
         type="text"
@@ -23,7 +21,11 @@
       name="illustration"
       id="illustration"
     />
-      <button type="submit">add</button>
+      <button type="submit">Add</button>
+    </form>
+  </div>
+
+
       <!-- <input
         type="file"
         class="file-input"
@@ -50,7 +52,3 @@
         <input type="file" id="file" name="file" />
         <input type="submit" value="Upload" />
       </div> -->
-    </form>
-  </div>
-  <!-- <a href="/">Main screen</a> -->
-</div>

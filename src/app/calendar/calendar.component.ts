@@ -33,7 +33,7 @@ export class CalendarComponent {
 
   getEventColor(date: Date): string | null {
     const eventIndex = this.dataService.dataEventsObject?.findIndex(event =>
-      new Date(event.created_at).toDateString() === date.toDateString()
+      new Date(event.event_date).toDateString() === date.toDateString()
     );
     return eventIndex !== -1 ? this.colorService.getColor(eventIndex) : null;
   }

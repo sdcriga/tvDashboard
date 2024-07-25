@@ -1,20 +1,38 @@
-.main-wrap {
-  display: flex;
-  justify-content: center;
+.news-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 8rem;
+  width: 100%; 
+  box-sizing: border-box; 
   form {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-    gap: 1em;
+    align-items:stretch;
+    gap: 1rem;
+    width: 100%; 
+    max-width: 600px; 
+    margin: 0 auto; 
     input {
-      width: 12em;
-      padding: 0.5em;
-      border: 1px solid #56423d;
+      padding: 0.7rem;
+      border: 1px solid #086ADB;
+      border-radius: 8px;
+      width: 100%;
+      box-sizing: border-box; 
+    }
+    button{
+      border-radius: 8px;
+      padding: 0.7rem;
+      border: 1px solid #086ADB;
+      background-color: #086ADB;
+      color: white;
+      width: 100%; 
+      box-sizing: border-box;
+      transition: background-color 0.3s ease;
+    }
+    button:hover{
+      background-color: #0048CF;
     }
   }
 }
-.file-upload-wrap {
-  display: flex;
-  gap: 1em;
-}
+
