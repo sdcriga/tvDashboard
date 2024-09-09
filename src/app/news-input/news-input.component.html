@@ -7,13 +7,37 @@
         name="title"
         id="title"
       />
-      <input
+      <div
+      class="error-message"
+      *ngIf="
+      newsInputForm.controls['title'].invalid &&
+      newsInputForm.controls['title'].touched
+      "
+      class="error-message"
+    >
+      <div *ngIf="newsInputForm.controls['title'].errors?.['required']">
+       Title is required
+      </div>
+    </div>
+      <textarea
         type="text"
         placeholder="Description"
         formControlName="description"
         name="description"
         id="description"
-      />
+      ></textarea>
+      <div
+      class="error-message"
+      *ngIf="
+      newsInputForm.controls['description'].invalid &&
+      newsInputForm.controls['description'].touched
+      "
+      class="error-message"
+    >
+      <div *ngIf="newsInputForm.controls['description'].errors?.['required']">
+        Description is required
+      </div>
+    </div>
       <input
       type="text"
       placeholder="Image link"
@@ -21,6 +45,18 @@
       name="illustration"
       id="illustration"
     />
+    <div
+      class="error-message"
+      *ngIf="
+      newsInputForm.controls['illustration'].invalid &&
+      newsInputForm.controls['illustration'].touched
+      "
+      class="error-message"
+    >
+      <div *ngIf="newsInputForm.controls['illustration'].errors?.['required']">
+        Illustration link is required
+      </div>
+    </div>
       <button type="submit">Add</button>
     </form>
   </div>

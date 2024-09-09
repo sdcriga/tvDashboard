@@ -9,6 +9,18 @@
         placeholder="Description"
         formControlName="description"
       />
+      <div
+      class="error-message"
+      *ngIf="
+      importantInputForm.controls['description'].invalid &&
+      importantInputForm.controls['description'].touched
+      "
+      class="error-message"
+    >
+      <div *ngIf="importantInputForm.controls['description'].errors?.['required']">
+        Description is required
+      </div>
+    </div>
       <button class="submit" type="submit">Add</button>
     </form>
   </div>

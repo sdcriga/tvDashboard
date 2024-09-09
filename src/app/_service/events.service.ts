@@ -9,8 +9,8 @@ import { CustomHttpResponse } from '../_interface/customhttp';
   providedIn: 'root'
 })
 export class EventsService {
-   private readonly server: string = 'http://officescreen.local:8080';
-  // private readonly server: string = 'http://localhost:8080';
+  //  private readonly server: string = 'http://officescreen.local:8080';
+  private readonly server: string = 'http://localhost:8080';
 
   dataEventsObject: Events[] | null = null;
   favouriteEventsDataObject: FavouriteEvents[] | null = null;
@@ -55,12 +55,12 @@ export class EventsService {
     );
   }
 
-  updateEvent$ = (id: number, title: String) =>
+  updateEvent$ = (id: number, title: String, event_date: String, time: String) =>
   <Observable<CustomHttpResponse<Events>>>(
     this.http
       .patch<CustomHttpResponse<Events>>(
         `${this.server}/api/update/event/${id}`,
-        title
+        {title, event_date, time}
       )
       .pipe(tap(console.log), catchError(this.handleError))
   );

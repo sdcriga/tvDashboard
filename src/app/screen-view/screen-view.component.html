@@ -1,43 +1,54 @@
-<body>
+
+  <div class="background-color">
+
+
 <div class="screen-view-container">
 <div class="news-events-wrap">
+
   <div class="news-info-container">
+    <div class="news-title">
+      <h1 class="news-title">News</h1>   
+      <h1 class="date-title">{{date | date: "EEEE, MMMM d, y"}}</h1> 
+    </div>
+    <div *ngIf="dataNewsFilteredObject && dataNewsFilteredObject.length > 0">
+      <div class="points-wrap" *ngIf="isContentVisible" @fadeSlide>
+        <div class="news-content-wrap">
+          <img *ngIf="dataNewsFilteredObject[activeIndex]" class="news-img" src="{{dataNewsFilteredObject[activeIndex].illustration}}" alt="">
+          <h1 *ngIf="dataNewsFilteredObject[activeIndex]">{{dataNewsFilteredObject[activeIndex].title | capitalize : 'sentenceCase'}}</h1>
+          <p *ngIf="dataNewsFilteredObject[activeIndex]">{{dataNewsFilteredObject[activeIndex].description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="news-info-container">
 
     <div class="news-title">
   <h1 class="news-title">News</h1>   
   <h1 class="date-title">{{date | date: "EEEE, MMMM d, y"}}</h1> 
     </div>
     <div *ngIf="this.newsService.dataNewsFilteredObject && this.newsService.dataNewsFilteredObject.length > 0">
-    <div class="points-wrap" *ngIf="this.newsService.dataNewsFilteredObject[activeIndex]">
-    <div class="news-content-wrap">
+    <div class="points-wrap" *ngIf="isContentVisible" @fadeSlide>
+    <div class="news-content-wrap"  >
       <img *ngIf="this.newsService.dataNewsFilteredObject[activeIndex]" class="news-img" src="{{this.newsService.dataNewsFilteredObject[activeIndex].illustration}}" alt="">
       <h1 *ngIf="this.newsService.dataNewsFilteredObject[activeIndex]">{{this.newsService.dataNewsFilteredObject[activeIndex].title | capitalize : "sentenceCase"}}</h1>
       <p *ngIf="this.newsService.dataNewsFilteredObject[activeIndex]">{{this.newsService.dataNewsFilteredObject[activeIndex].description}}</p>
       </div>
       </div>
       </div>
-<!-- 
-      <div *ngIf="this.newsService.dataNewsObject && this.newsService.dataNewsObject.length > 0">
-        <div class="points-wrap" *ngFor="let news of this.newsService.dataNewsObject | filter: filter">
-        <div class="news-content-wrap" >
-          <img *ngIf="news.active" class="news-img" src="{{news.illustration}}" alt="">
-          <h1 *ngIf="news.active">{{news.title | capitalize : "sentenceCase"}}</h1>
-          <p *ngIf="news.active">{{news.description}}</p>
-          </div>
-          </div>
-          </div> -->
-  </div>
+  </div> -->
 
     
   <div class="events-title-wrap">
     <h1 class="event-title">Next events</h1>
 
-    <div class="event-info-container">
+    <div class="event-info-container" *ngIf="displayedEvents">
       <!-- [ngStyle]="{'background-color': getColor(i)}" -->
       <div
-        *ngFor="let event of this.dataService.dataEventsObject; index as i"
-        class="event-list-container"
-      >
+      *ngFor="let event of displayedEvents; index as i"
+      class="event-list-container"
+      @fadeInOut
+  
+    >
         <div class="event-title-wrap">
           <div>
             <img *ngIf="event.active" src="{{event.illustration}}" alt="">
@@ -64,4 +75,4 @@
   
 
 </div>
-</body>
+</div>

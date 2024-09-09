@@ -6,4 +6,6 @@ export interface FavouriteNews {
     illustration: string | null;
     favourite: boolean | null;
     active: boolean | null;
+    toggled?: boolean;
+    collapsed?: boolean;
   }

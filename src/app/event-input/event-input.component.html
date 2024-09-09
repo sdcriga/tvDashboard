@@ -1,8 +1,44 @@
 <div class="event-container">
     <form (ngSubmit)="onSubmit()" [formGroup]="eventInputForm">
       <input type="text" placeholder="Title" formControlName="title" />
+      <div
+      class="error-message"
+      *ngIf="
+      eventInputForm.controls['title'].invalid &&
+      eventInputForm.controls['title'].touched
+      "
+      class="error-message"
+    >
+      <div *ngIf="eventInputForm.controls['title'].errors?.['required']">
+        Title is required
+      </div>
+    </div>
       <input type="date" placeholder="Date" formControlName="event_date" />
-      <input type="time" name="" id="" formControlName="time">
+      <div
+      class="error-message"
+      *ngIf="
+      eventInputForm.controls['event_date'].invalid &&
+      eventInputForm.controls['event_date'].touched
+      "
+      class="error-message"
+    >
+      <div *ngIf="eventInputForm.controls['event_date'].errors?.['required']">
+        Please provide date
+      </div>
+    </div>
+      <input type="time" name="time" id="time" formControlName="time">
+      <div
+      class="error-message"
+      *ngIf="
+      eventInputForm.controls['time'].invalid &&
+      eventInputForm.controls['time'].touched
+      "
+      class="error-message"
+    >
+      <div *ngIf="eventInputForm.controls['time'].errors?.['required']">
+        Please provide time
+      </div>
+    </div>
       <input
       type="text"
       placeholder="Image link"
@@ -10,6 +46,18 @@
       name="illustration"
       id="illustration"
     />
+    <div
+    class="error-message"
+    *ngIf="
+    eventInputForm.controls['illustration'].invalid &&
+    eventInputForm.controls['illustration'].touched
+    "
+    class="error-message"
+  >
+    <div *ngIf="eventInputForm.controls['illustration'].errors?.['required']">
+      Illustration link is required
+    </div>
+  </div>
     <button type="submit">Add</button>
     </form>
   </div>

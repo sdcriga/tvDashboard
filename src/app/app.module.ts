@@ -5,11 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DndDirective } from './dnd.directive';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { MainScreenComponent } from './main-screen/main-screen.component';
 import { NewsInputComponent } from './news-input/news-input.component';
 import { EventInputComponent } from './event-input/event-input.component';
 import { ImportantInputComponent } from './important-input/important-input.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { ScreenViewComponent } from './screen-view/screen-view.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalendarComponent } from './calendar/calendar.component';
@@ -25,6 +24,8 @@ import { ExtraComponent } from './extra/extra.component';
 import { CopyLinkDirective } from './copy-link.directive';
 import { LoginComponent } from './login/login.component';
 import { TokenInterceptor } from './interceptor/token.interceptor';
+import { NgxCollapseAnimatedDirective } from 'ngx-collapse-animated';
+import { SharedConfettiComponent } from './shared-confetti/shared-confetti.component';
 
 
 @NgModule({
@@ -32,7 +33,6 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
     AppComponent,
     DndDirective,
     CopyLinkDirective,
-    MainScreenComponent,
     NewsInputComponent,
     EventInputComponent,
     ImportantInputComponent,
@@ -44,7 +44,8 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
     FavouritesComponent,
     ImagesComponent,
     ExtraComponent,
-    LoginComponent
+    LoginComponent,
+    SharedConfettiComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +57,8 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
     FormsModule,
     ReversePipe,
     SentenceCasePipe,
+    NgxCollapseAnimatedDirective,
+    RouterOutlet
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

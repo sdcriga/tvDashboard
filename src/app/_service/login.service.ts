@@ -4,7 +4,6 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, tap, catchError, throwError } from 'rxjs';
 import { CustomHttpResponse } from '../_interface/customhttp';
 import { Profile } from '../_interface/profile';
-import { User } from '../_interface/user';
 import { Key } from 'src/enum/key.enum';
 
 @Injectable({
@@ -12,10 +11,10 @@ import { Key } from 'src/enum/key.enum';
 })
 export class LoginService {
 
-  private readonly server: string = 'http://officescreen.local:8080';
+  // private readonly server: string = 'http://officescreen.local:8080';
 
-  // private readonly server: string =
-  // 'http://localhost:8080';
+  private readonly server: string =
+  'http://localhost:8080';
 
   private jwtHelper = new JwtHelperService();
 

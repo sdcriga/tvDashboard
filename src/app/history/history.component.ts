@@ -2,11 +2,12 @@ import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { News } from '../_interface/news';
 import { NewsService } from '../_service/news.service';
 import { Important } from '../_interface/important';
-import { trigger, state, style, AUTO_STYLE, transition, animate } from '@angular/animations';
+import { trigger, state, style, AUTO_STYLE, transition, animate, group, query, sequence } from '@angular/animations';
 import { DataSaveService } from '../_service/data-save.service';
 import { ImportantService } from '../_service/important.service';
 import { Events } from '../_interface/events';
 import { EventsService } from '../_service/events.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 const DEFAULT_DURATION = 300;
 
@@ -37,6 +38,7 @@ const DEFAULT_DURATION = 300;
 })
 export class HistoryComponent implements OnInit{
   dataObject: News[] | null = null;
+  dataNewsObject: News | null = null;
   @Input() newsData: News[] | null = null;
   @Input() importantData: Important[] | null = null;
   @Input() eventsData: Events[] | null = null;
@@ -46,8 +48,18 @@ export class HistoryComponent implements OnInit{
   toggled: boolean = false;
   // collapsed = false;
 
+  // isEditNewsFormVisible: boolean = false;
+  // editedTitle: string = '';
+  // editedDescription: string = '';
+    // newsTextareaData: any[] = [];
+  editNewsId: number | null = null;
+editEventId: number | null = null;
+editImportantId: number | null = null;
+visible: boolean = true;
+title = 'collapse-animated';
 
-  constructor(public eventsService: EventsService, public newsService: NewsService, public importantService: ImportantService, public dataSaveService: DataSaveService, private cdr: ChangeDetectorRef) {
+
+  constructor( private formBuilder: FormBuilder, public eventsService: EventsService, public newsService: NewsService, public importantService: ImportantService, public dataSaveService: DataSaveService, private cdr: ChangeDetectorRef) {
     this.selectedButton = 'News';
   }
 
@@ -56,13 +68,103 @@ export class HistoryComponent implements OnInit{
       this.newsData.forEach(news => {
         news.toggled = false;
         news.collapsed = true; 
+        this.visible = true;
       });
     }
     // this.cdr.detectChanges();
   }
 
-  openEditForm(){
-    
+  editNewsForm = this.formBuilder.group({
+    title: [''],
+    description: [''],
+    illustration: ['']
+  });
+
+  editEventsForm = this.formBuilder.group({
+    title: [''],
+    event_date: [''],
+    time: ['']
+  });
+
+  editImportantForm = this.formBuilder.group({
+    description: ['']
+  });
+
+  openNewsEditForm(news: any): void{
+    // this.isEditNewsFormVisible = true;
+    this.editNewsId = news.id;
+    this.editNewsForm.setValue({
+      title: news.title,
+      description: news.description,
+      illustration: news.illustration
+    });
+  }
+
+  openEventEditForm(event: any): void{
+    this.editEventId = event.id;
+    this.editEventsForm.setValue({
+      title: event.title,
+      event_date: event.event_date,
+      time: event.time
+    });
+  }
+
+  openImportantEditForm(important: any): void{
+    this.editImportantId = important.id;
+    this.editImportantForm.setValue({
+      description: important.description,
+    });
+  }
+
+  saveNewsEditForm(id: number) {
+    const newsEditedInfo: News = this.editNewsForm.value as News;
+    this.editNewsId = null;
+    this.newsService.updateNews$(id, newsEditedInfo.title, newsEditedInfo.description).subscribe({
+      next: (response) => {
+        console.log('News edited:', response);
+      },
+      error: (error) => {
+        console.error('Failed to edit news:', error);
+      }
+    });
+  }
+
+  saveEventEditForm(id: number) {
+    const eventEditedInfo: Events = this.editEventsForm.value as Events;
+    this.editEventId = null;
+    this.eventsService.updateEvent$(id, eventEditedInfo.title, eventEditedInfo.event_date, eventEditedInfo.time).subscribe({
+      next: (response) => {
+        console.log('Event edited:', response);
+      },
+      error: (error) => {
+        console.error('Failed to edit event:', error);
+      }
+    });
+  }
+
+  saveImportantEditForm(id: number) {
+    const importantEditedInfo: Important = this.editImportantForm.value as Important;
+    this.editImportantId = null;
+    this.importantService.updateImportant$(id, importantEditedInfo.description).subscribe({
+      next: (response) => {
+        console.log('Important edited:', response);
+      },
+      error: (error) => {
+        console.error('Failed to edit important:', error);
+      }
+    });
+  }
+
+  cancelNewsEditForm() {
+    this.editNewsId = null;
+  }
+
+  cancelEventEditForm() {
+    this.editEventId = null;
+  }
+
+  cancelImportantEditForm() {
+    this.editImportantId = null;
   }
 
   onNewsDeactivated(id: number): void {
@@ -259,10 +361,13 @@ onEventsFavouriteAction(title: string, event_date: string, time: string, illustr
 
   toggleIcon(news: News) {
     news.toggled = !news.toggled;
-    news.collapsed = !news.collapsed; 
+    // news.collapsed = !news.collapsed; 
+    this.visible = false;
   }
 
-
+  // toggleIcon() {
+  // this.visible = true;
+  // }
 
   // toggleIconDown(news: News) {
   //   news.toggled = !news.toggled;
@@ -271,7 +376,8 @@ onEventsFavouriteAction(title: string, event_date: string, time: string, illustr
 
   // toggleIconUp(news: News) {
   //   news.toggled = !news.toggled;
-  //   this.collapsed = true;
+  //   // this.collapsed = true;
+  //     this.visible = true;
   // }
 
 

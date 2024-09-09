@@ -18,16 +18,16 @@
              <div class="news-content-wrap">
           <p class="news-title">{{ news.title | capitalize : "sentenceCase"}}</p>
 
-       <div class="news-description" [@collapse]="news.collapsed">
+       <div class="news-description" [ngxCollapseAnimated]="visible" >
           <p *ngIf="news.toggled">{{ news.description }}</p>
         </div>
           </div>
           <div class="icons-wrap">
-            <svg class="icon icon-plus" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M7.5 4v7M4 7.5h7m-3.5 7a7 7 0 110-14 7 7 0 010 14z" stroke="#008E00"></path></svg>
+            <svg (click)="onSubmitNews(news)" class="icon icon-plus" *ngIf="!news.toggled" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M7.5 1.5l3.25 3m-3.25-3l-3 3m3-3V11m6-4v6.5h-12V7" stroke="#008E00"></path></svg>
             <svg class="icon icon-bin" (click)="onNewsDelete(news.newsId)" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15" *ngIf="!news.toggled"><path d="M4.5 3V1.5a1 1 0 011-1h4a1 1 0 011 1V3M0 3.5h15m-13.5 0v10a1 1 0 001 1h10a1 1 0 001-1v-10M7.5 7v5m-3-3v3m6-3v3" stroke="#cb8a80"></path></svg>
-            <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16" (click)="toggleIcon(news)" *ngIf="!news.toggled"><path d="M14 5l-6.5 7L1 5" stroke="#086adb" stroke-linecap="square"
+            <svg class="arrow-icon" (click)="toggleIcon(news)"  *ngIf="!news.toggled" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16" (click)="toggleIcon(news)"><path d="M14 5l-6.5 7L1 5" stroke="#086adb" stroke-linecap="square"
                 ></path></svg>
-              <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16"  (click)="toggleIcon(news)" *ngIf="news.toggled"><path d="M1 10l6.5-7 6.5 7" stroke="#086adb" stroke-linecap="square"
+              <svg class="arrow-icon arrow-icon-opened" (click)="toggleIcon(news)"  *ngIf="news.toggled" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16"  (click)="toggleIcon(news)" ><path d="M1 10l6.5-7 6.5 7" stroke="#086adb" stroke-linecap="square"
                ></path></svg>
 </div>
           </div>
@@ -43,7 +43,7 @@
         <p class="event-title">{{ event.title | capitalize : "sentenceCase"}}</p>
         </div>
         <div class="icons-wrap">
-          <svg class="icon icon-plus" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M7.5 4v7M4 7.5h7m-3.5 7a7 7 0 110-14 7 7 0 010 14z" stroke="#008E00"></path></svg>
+          <svg class="icon icon-plus" (click)="onSubmitEvent(event)" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M7.5 1.5l3.25 3m-3.25-3l-3 3m3-3V11m6-4v6.5h-12V7" stroke="#008E00"></path></svg>
           <svg class="icon icon-bin" (click)="onEventDelete(event.eventId)" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15" *ngIf="!event.toggled"><path d="M4.5 3V1.5a1 1 0 011-1h4a1 1 0 011 1V3M0 3.5h15m-13.5 0v10a1 1 0 001 1h10a1 1 0 001-1v-10M7.5 7v5m-3-3v3m6-3v3" stroke="#cb8a80"></path></svg>
 </div>
         </div>
@@ -58,9 +58,9 @@
 
         <p>{{ important.description | capitalize : "sentenceCase"}}</p>
 <div class="action-wrap">
-    <svg class="icon icon-plus" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M7.5 4v7M4 7.5h7m-3.5 7a7 7 0 110-14 7 7 0 010 14z" stroke="#008E00"></path></svg>
+  <svg class="icon icon-plus" (click)="onSubmitImportant(important)" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M7.5 1.5l3.25 3m-3.25-3l-3 3m3-3V11m6-4v6.5h-12V7" stroke="#008E00"></path></svg>
 
-    <svg class="icon-bin" (click)="onImportantDelete(important.importantId)" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15" *ngIf="!important.toggled"><path d="M4.5 3V1.5a1 1 0 011-1h4a1 1 0 011 1V3M0 3.5h15m-13.5 0v10a1 1 0 001 1h10a1 1 0 001-1v-10M7.5 7v5m-3-3v3m6-3v3" stroke="#cb8a80"></path></svg>
+    <svg class="icon icon-bin" (click)="onImportantDelete(important.importantId)" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15" *ngIf="!important.toggled"><path d="M4.5 3V1.5a1 1 0 011-1h4a1 1 0 011 1V3M0 3.5h15m-13.5 0v10a1 1 0 001 1h10a1 1 0 001-1v-10M7.5 7v5m-3-3v3m6-3v3" stroke="#cb8a80"></path></svg>
         </div> 
 </div>
         <div>

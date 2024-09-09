@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { SharedService } from '../_service/shared.service';
 import { Events } from '../_interface/events';
 import { DataSaveService } from '../_service/data-save.service';
@@ -19,7 +19,6 @@ export class EventInputComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private sharedService: SharedService,
     public dataService: DataSaveService
   ) {}
 
@@ -29,11 +28,10 @@ export class EventInputComponent implements OnInit {
   }
 
   eventInputForm = this.formBuilder.group({
-    title: [''],
-    event_date: [''],
-    time: [''],
-    illustration: ['']
-    // file: [''],
+    title: ['', [Validators.required]],
+    event_date: ['', [Validators.required]],
+    time: ['', [Validators.required]],
+    illustration: ['', [Validators.required]]
   });
 
   onSubmit(): void {

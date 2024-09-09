@@ -1,200 +1,271 @@
 .favourites-container {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr;
-    padding: 8rem 15rem;
-    width: 100%;
-    box-sizing: border-box;
-    h1 {
-      position: absolute;
-      top: 3rem;
-      left: 3rem;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 8rem 15rem;
+  width: 100%;
+  box-sizing: border-box;
+  h1 {
+    position: absolute;
+    top: 3rem;
+    left: 3rem;
+    font-family: SwissFontTwo;
+    font-size: 1.7rem;
+    color: #333333;
+  }
+  .buttons-wrap {
+    display: flex;
+    gap: 1rem;
+    button {
       font-family: SwissFontTwo;
-      font-size: 1.7rem;
-      color: #333333;
-    }
-    .buttons-wrap {
-      display: flex;
-      gap: 1rem;
-      button {
-        font-family: SwissFontTwo;
-        font-size: 1.2rem;
-        border-radius: 8px;
-        padding: 0.7rem;
-        border: 0.8px solid #11aaff;
-        background-color: white;
-        color: #5c5c5c;
-        width: 50%;
-        cursor: pointer;
-        transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out, border 0.1s ease-in-out;
-      }
-      button.selected {
-        border: 1.5px solid #086adb;
-        color: #086adb;
-      //   background-color: #F8FAFB;
-        background-color: #EEF3F6;
-      }
-    }
-    .news-container {
-      margin-top: 2rem;
-      display: flex;
-      flex-direction: column;
-      border: 0.8px solid #858585;
+      font-size: 1.2rem;
       border-radius: 8px;
-      .news-list-wrap {
-        border-bottom: 0.8px solid #858585;
-        padding: 1rem;
-        transition: background-color 0.1s ease-in-out;
-        .news-element {
-          display: flex;
-          justify-content: space-between;
-          justify-items: baseline;
-          .news-content-wrap {
-            .news-title {
-              font-family: SwissFontTwo;
-              font-size: 1.3rem;
-              color: #001155;
-            }
-            .news-description{
-                        p {
-              font-family: SwissFont;
-              padding: 1rem;
-              color: #333333;
-            }
-            }
-  
-          }
-          .icons-wrap{
-              display: flex;
-              gap: 1rem;
-              align-items: center;
-              justify-content: center;
-                 svg {
-            cursor: pointer;
-            width: 16px !important;
-            height: 16px !important;
-          }     
-          }
-  
-        }
-      }
+      padding: 0.7rem;
+      border: 0.8px solid #11aaff;
+      background-color: white;
+      color: #5c5c5c;
+      width: 50%;
+      cursor: pointer;
+      transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out,
+        border 0.1s ease-in-out;
     }
-    .events-container{
-        margin-top: 2rem;
+    button.selected {
+      border: 1.5px solid #086adb;
+      color: #086adb;
+      background-color: #eef3f6;
+    }
+  }
+  .news-container,
+  .important-container,
+  .events-container {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    border: 0.8px solid #858585;
+    border-radius: 8px;
+    .news-list-wrap {
+      border-bottom: 0.8px solid #858585;
+      padding: 1rem;
+      transition: background-color 0.1s ease-in-out;
+      .news-element {
         display: flex;
-        flex-direction: column;
-        border: 0.8px solid #858585;
-        border-radius: 8px;
-        .event-list-wrap {
-          border-bottom: 0.8px solid #858585;
-          padding: 1rem;
-          transition: background-color 0.1s ease-in-out;
-          .event-element {
-            display: flex;
-            justify-content: space-between;
-            justify-items: baseline;
-            .event-content-wrap {
-              .event-title {
-                font-family: SwissFontTwo;
-                font-size: 1.3rem;
-                color: #001155;
-              }
-    }
-            .icons-wrap{
-                display: flex;
-                gap: 1rem;
-                align-items: center;
-                justify-content: center;
-                   svg {
-              cursor: pointer;
-              width: 16px !important;
-              height: 16px !important;
-            }     
-            }
-    
-          }
-        }  
-    }
-    .important-container {
-      margin-top: 2rem;
-      display: flex;
-      flex-direction: column;
-      border: 0.8px solid #858585;
-      border-radius: 8px;
-      .important-list-wrap {
-        border-bottom: 0.8px solid #858585;
-        padding: 1rem;
-        .important-content-wrap {
-          display: flex;
-          justify-content: space-between;
-          p {
+        justify-content: space-between;
+        justify-items: baseline;
+        position: relative;
+        .news-content-wrap {
+          .news-title {
             font-family: SwissFontTwo;
             font-size: 1.3rem;
             color: #001155;
+            margin: 0;
           }
-          .action-wrap {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            svg{
-              cursor: pointer;
+          .news-description {
+            p {
+              font-family: SwissFont;
+    
+              color: #333333;
             }
           }
         }
       }
     }
   }
-  
-  .active-banner {
-      padding: 0.3rem 0.5rem;
-      border-radius: 8px;
-      background-color: #e8f3e7;
-      color: #666666;
-      font-family: SwissFontTwo;
+  .event-list-wrap {
+    border-bottom: 0.8px solid #858585;
+    padding: 1rem;
+    transition: background-color 0.1s ease-in-out;
+    .event-element {
+      display: flex;
+      justify-content: space-between;
+      justify-items: baseline;
+      .event-content-wrap {
+        .event-title {
+          font-family: SwissFontTwo;
+          font-size: 1.3rem;
+          color: #001155;
+          margin: 0;
+        }
+      }
     }
-  
-  .important-list-wrap:last-child, .news-list-wrap:last-child, .event-list-wrap:last-child {
-    border-bottom: none !important;
-    border-bottom-right-radius: 8px;
-    border-bottom-left-radius: 8px;
   }
 
-  .important-list-wrap:first-child, .news-list-wrap:first-child {
-border-top-left-radius: 8px !important;
-border-top-right-radius: 8px !important;
+  .important-list-wrap {
+    border-bottom: 0.8px solid #858585;
+    padding: 1rem;
+    .important-content-wrap {
+      display: flex;
+      justify-content: space-between;
+      p {
+        font-family: SwissFontTwo;
+        font-size: 1.3rem;
+        color: #001155;
+        margin: 0;
+      }
+      .action-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+      }
+    }
   }
-  
-  .news-background {
-  //   background-color: #f8fafb;
+}
+
+svg {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+
+.icons-wrap {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.active-banner {
+  padding: 0.3rem 0.5rem;
+  border-radius: 8px;
+  background-color: #e8f3e7;
+  color: #666666;
+  font-family: SwissFontTwo;
+}
+
+.important-list-wrap:last-child,
+.news-list-wrap:last-child,
+.event-list-wrap:last-child {
+  border-bottom: none !important;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.important-list-wrap:first-child,
+.news-list-wrap:first-child,
+.event-list-wrap:first-child {
+  border-top-left-radius: 8px !important;
+  border-top-right-radius: 8px !important;
+}
+
+.news-background {
   background-color: #fcfcfc;
-    border-radius: 8px;
-    // border-top-left-radius: 8px !important;
-    // border-top-left-radius: 8px !important;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-  
-  .news-list-wrap:hover, .important-list-wrap:hover, .event-list-wrap:hover:hover{
-      background-color: #fcfcfc;
-  }
+  border-radius: 8px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
 
-  .icon {
-    transition: transform 0.3s ease;
+.news-list-wrap:hover,
+.important-list-wrap:hover,
+.event-list-wrap:hover:hover {
+  background-color: #fcfcfc;
+}
+
+.icon {
+  transition: transform 0.3s ease;
 }
 
 .icon:hover {
-    transform: scale(1.05) !important;
+  transform: scale(1.05) !important;
 }
 
-.icon-bin, .icon-plus path {
-    transition: stroke 0.3s; 
+.icon-bin,
+.icon-plus path {
+  transition: stroke 0.3s;
+}
+
+.icon-bin:hover path {
+  stroke: #b65b4d;
+}
+.icon-plus:hover path {
+  stroke: #006300;
+}
+
+.arrow-icon-opened{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+@media only screen and (max-width: 400px) {
+  #mobile {
+    display: block;
+  }
+  .favourites-container {
+    padding: 3rem 1rem !important;
+  }
+  h1 {
+    top: 1rem !important;
+    left: 1.5rem !important;
+    font-family: SwissFontTwo;
+    font-size: 1rem !important;
+  }
+  .buttons-wrap {
+    display: flex;
+    gap: 0.5rem !important;
+    button {
+      font-family: SwissFont !important;
+      font-size: 0.8rem !important;
+      padding: 0.3rem 1.5rem !important;
+      margin-top: 0.6rem !important;
+      width: 80% !important;
+      border-radius: 6px !important;
+      transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out,
+        border 0.1s ease-in-out;
+    }
+    button.selected {
+      border: 1.2px solid #086adb !important;
+    }
+  }
+  .important-container,
+  .events-container,
+  .news-container {
+    margin-top: 1rem !important;
+    border-radius: 6px !important;
+    .important-list-wrap,
+    .news-list-wrap,
+    .event-list-wrap {
+      padding: 0.5rem !important;
+      p {
+        font-family: SwissFontTwo;
+        font-size: 0.6rem !important;
+      }
+    }
   }
 
-.icon-bin:hover path{
-    stroke: #b65b4d;
-    
-}
-.icon-plus:hover path{
-    stroke: #006300;
+  .active-banner {
+    padding: 0.1rem 0.3rem !important;
+    border-radius: 4px !important;
+    font-family: SwissFontTwo;
+    font-size: 0.7rem !important;
+  }
+  .inactive-banner {
+    padding: 0.1rem 0.3rem !important;
+    border-radius: 4px !important;
+    font-family: SwissFontTwo;
+    font-size: 0.7rem !important;
+  }
+  .icon {
+    width: 12px !important;
+    height: 12px !important;
+  }
+  .arrow-icon {
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  .events-icons-wrap {
+    align-items: flex-start !important;
+  }
+
+  .events-content-wrap {
+    display: flex;
+    flex-direction: column !important;
+    gap: 0.2rem !important;
+    align-items: left !important;
+    justify-content: left !important;
+    p {
+      margin: 0 !important;
+      align-self: flex-start !important;
+    }
+  }
 }

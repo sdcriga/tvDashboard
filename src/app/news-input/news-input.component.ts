@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { SharedService } from '../_service/shared.service';
+import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { News } from '../_interface/news';
 import { NewsService } from '../_service/news.service';
@@ -17,21 +16,18 @@ export class NewsInputComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private sharedService: SharedService,
     private http: HttpClient,
     public newsService: NewsService
   ) {}
 
   ngOnInit() {
-   // this.dataMainObject = this.sharedService.getMainSectionData();
-   this.newsService.getAndStoreNewsObject();
+    this.newsService.getAndStoreNewsObject();
   }
 
   newsInputForm = this.formBuilder.group({
-    title: [''],
-    description: [''],
-    illustration: ['']
-    // file: [''],
+    title: ['', [Validators.required]],
+    description: ['', [Validators.required]],
+    illustration: ['', [Validators.required]],
   });
 
   onSubmit(): void {
@@ -42,7 +38,7 @@ export class NewsInputComponent implements OnInit {
       },
       error: (error) => {
         console.error('Failed to create news:', error);
-      }
+      },
     });
   }
 

@@ -39,7 +39,7 @@ const routes: Routes = [
     component: ImportantInputComponent,
   },
 
-  { path: '', redirectTo: '/', pathMatch: 'full' },
+  // { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: '**', component: ScreenViewComponent },
 ];
 

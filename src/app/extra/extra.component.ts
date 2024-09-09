@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import confetti from 'canvas-confetti';
+import { ConfettiService } from '../_service/confetti.service';
 
 @Component({
   selector: 'app-extra',
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrl: './extra.component.scss'
 })
 export class ExtraComponent {
+
+  constructor(private confettiService: ConfettiService) {}
+
+  celebrate() {
+    this.confettiService.triggerConfetti(); 
+  }
 
 }

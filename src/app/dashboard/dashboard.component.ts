@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { News } from '../_interface/news';
 import { NewsService } from '../_service/news.service';
 import { Important } from '../_interface/important';
@@ -8,7 +8,7 @@ import { ImportantService } from '../_service/important.service';
 import { Events } from '../_interface/events';
 import { FavouriteEvents } from '../_interface/favourite-events';
 import { EventsService } from '../_service/events.service';
-import { BehaviorSubject, Observable, catchError, map, of, startWith, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, throwError } from 'rxjs';
 import { CustomHttpResponse } from '../_interface/customhttp';
 import { Profile } from '../_interface/profile';
 import { LoginService } from '../_service/login.service';
@@ -46,7 +46,6 @@ export class DashboardComponent {
   ngOnInit() {
     this.profileState$ = this.loginService.profile$().pipe(
       map((response) => {
-        console.log(response + "user user user");
         this.loggedUserDataSubject.next(response);
         return response;
       }),

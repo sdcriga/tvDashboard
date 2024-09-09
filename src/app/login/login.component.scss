@@ -34,13 +34,12 @@
     .username-input {
       border: 1px solid #086adb;
       border-radius: 8px;
-            margin-top: 1.3rem;
+      margin-top: 1.3rem;
     }
     .password-input {
       border: none;
       border-radius: 8px;
       width: 60%;
-
     }
     button {
       padding: 0.7rem;
@@ -91,4 +90,47 @@ input:focus {
     text-align: left;
     width: 60%;
     margin-top: 0.5rem;
+  }
+
+  @media only screen and (max-width: 400px) {
+    .login-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      padding: 2rem !important;
+      width: 100%;
+      box-sizing: border-box;
+      h1 {
+        font-size: 0.9rem !important;
+        margin-top: 3rem;
+        width: 70%;
+        .screen-icon {
+          position: absolute;
+          bottom: 0 !important;
+          margin-left: 0.4rem;
+        }
+      }
+    form {
+      width: 100% !important;
+      max-width: 600px;
+      margin: 0 auto;
+      input {
+        padding: 0.5rem !important;
+        box-sizing: border-box;
+      }
+      .username-input {
+        border-radius: 6px !important;
+         margin-top: 1.3rem;
+      }
+      .password-input {
+        border-radius: 6px !important;
+        width: 60%;
+      }
+    }
+    button {
+      padding: 0.5rem !important;
+      width: 60%;
+      border-radius: 6px !important;
+      margin-top: 0.8rem !important;
+    }
+  }
   }

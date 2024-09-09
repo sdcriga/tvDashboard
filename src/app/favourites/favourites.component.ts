@@ -8,6 +8,8 @@ import { AUTO_STYLE, animate, state, style, transition, trigger } from '@angular
 import { ImportantService } from '../_service/important.service';
 import { FavouriteEvents } from '../_interface/favourite-events';
 import { EventsService } from '../_service/events.service';
+import { Events } from '../_interface/events';
+import { Important } from '../_interface/important';
 
 const DEFAULT_DURATION = 300;
 
@@ -33,19 +35,53 @@ export class FavouritesComponent {
   selectedButton: string;
   currentInformationText = "No historical data";
   toggled: boolean = false;
-
+  visible: boolean = true;
 
   constructor(public eventsService: EventsService, public newsService: NewsService, public importantService: ImportantService, public dataSaveService: DataSaveService, private cdr: ChangeDetectorRef) {
     this.selectedButton = 'News';
   }
 
   ngOnInit() {
-    // if (this.newsFavouriteData) {
-    //   this.newsFavouriteData.forEach(news => {
-    //     news.toggled = false;
-    //     news.collapsed = true; 
-    //   });
-    // }
+    if (this.newsFavouriteData) {
+      this.newsFavouriteData.forEach(news => {
+        news.toggled = false;
+        news.collapsed = true; 
+        this.visible = true;
+      });
+    }
+  }
+
+  onSubmitNews(news: News): void {
+    this.newsService.newNews$(news).subscribe({
+      next: (response) => {
+        console.log('News added successfully:', response);
+      },
+      error: (error) => {
+        console.error('Failed to add news:', error);
+      },
+    });
+  }
+
+  onSubmitEvent(event: Events): void {
+    this.eventsService.newEvent$(event).subscribe({
+      next: (response) => {
+        console.log('Event added successfully:', response);
+      },
+      error: (error) => {
+        console.error('Failed to add event:', error);
+      },
+    });
+  }
+
+  onSubmitImportant(important: Important): void {
+    this.importantService.newImportant$(important).subscribe({
+      next: (response) => {
+        console.log('Important added successfully:', response);
+      },
+      error: (error) => {
+        console.error('Failed to add important:', error);
+      },
+    });
   }
 
   onImportantDelete(id: number): void {

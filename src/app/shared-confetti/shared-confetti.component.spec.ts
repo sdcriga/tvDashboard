@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MainScreenComponent } from './main-screen.component';
+import { SharedConfettiComponent } from './shared-confetti.component';
 
-describe('MainScreenComponent', () => {
-  let component: MainScreenComponent;
-  let fixture: ComponentFixture<MainScreenComponent>;
+describe('SharedConfettiComponent', () => {
+  let component: SharedConfettiComponent;
+  let fixture: ComponentFixture<SharedConfettiComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MainScreenComponent ]
+      imports: [SharedConfettiComponent]
     })
     .compileComponents();
-
-    fixture = TestBed.createComponent(MainScreenComponent);
+    
+    fixture = TestBed.createComponent(SharedConfettiComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

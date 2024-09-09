@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { DataSaveService } from '../_service/data-save.service';
 import { Important } from '../_interface/important';
 import { FavouriteImportant } from '../_interface/favourite-important';
@@ -31,7 +31,7 @@ export class ImportantInputComponent implements OnInit {
   }
 
   importantInputForm = this.formBuilder.group({
-    description: [''],
+    description: ['', [Validators.required]],
   });
 
   onSubmit(): void {
@@ -87,7 +87,7 @@ onEdit(id: number, description: string): void {
     this.emptyDescriptionErrorMessage = "Description cannot be empty!";  
     return;
 }
-  this.importantService.updateInformation$(id, description).subscribe({
+  this.importantService.updateImportant$(id, description).subscribe({
       next: (response) => {
           console.log('Information edited successfully:', response); 
           this.editMode = false;  

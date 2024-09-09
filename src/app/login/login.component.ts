@@ -23,9 +23,9 @@ export class LoginComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.loginService.isAuthenticated()
-      ? this.router.navigate(['/'])
-      : this.router.navigate(['/login']);
+    // this.loginService.isAuthenticated()
+    //   ? this.router.navigate(['/'])
+    //   : this.router.navigate(['/login']);
   }
 
 

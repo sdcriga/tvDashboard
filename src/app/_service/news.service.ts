@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { News } from '../_interface/news';
 import { FavouriteNews } from '../_interface/favourite-news';
-import { Observable, Subject, catchError, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, catchError, tap, throwError } from 'rxjs';
 import { CustomHttpResponse } from '../_interface/customhttp';
 
 @Injectable({
@@ -10,13 +10,15 @@ import { CustomHttpResponse } from '../_interface/customhttp';
 })
 export class NewsService {
 
-   private readonly server: string = 'http://officescreen.local:8080';
-//  private readonly server: string = 'http://localhost:8080';
+  //  private readonly server: string = 'http://officescreen.local:8080';
+ private readonly server: string = 'http://localhost:8080';
  
  private newsSubject = new Subject<News[]>();
  dataNewsObject: News[] | null = null;
  dataNewsFilteredObject: News[] | null = null;
  favouriteNewsDataObject: FavouriteNews[] | null = null;
+ private newsSubjectBe = new BehaviorSubject<News[]>([]);
+ public news$ = this.newsSubjectBe.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -29,7 +31,8 @@ export class NewsService {
       news, httpOptions
     ).pipe(
       tap(console.log),
-      catchError(this.handleError)
+      catchError(this.handleError),
+      tap(() => this.getAndStoreNewsObject())
     );
   }
 
@@ -58,12 +61,12 @@ export class NewsService {
     );
   }
 
-  updateNews$ = (id: number, description: String) =>
+  updateNews$ = (id: number, title: String, description: String) =>
   <Observable<CustomHttpResponse<News>>>(
     this.http
       .patch<CustomHttpResponse<News>>(
         `${this.server}/api/update/news/${id}`,
-        description
+        {title, description}
       )
       .pipe(tap(console.log), catchError(this.handleError))
   );
@@ -129,9 +132,12 @@ export class NewsService {
       next: (response) => {
         console.log('News list received:', response);
         this.dataNewsObject = response.data["news"]; 
+        const newsObject = response.data['news'];
+        const filteredNews = newsObject?.filter(news => news.active === true) || [];
         this.dataNewsFilteredObject = this.dataNewsObject?.filter(news => news.active === true) || null;
         console.log('Filtered News object:', this.dataNewsFilteredObject);
         console.log('News object:', this.dataNewsObject);
+        this.newsSubjectBe.next(filteredNews);
       },
       error: (error) => {
         console.error('Failed to create news:', error);

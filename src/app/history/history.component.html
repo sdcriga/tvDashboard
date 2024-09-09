@@ -1,78 +1,220 @@
 <div class="history-container">
-    <h1>History</h1>
-    <div class="buttons-wrap">
-        <button 
-        *ngFor="let button of buttons" 
-        [ngClass]="{'selected': selectedButton === button}"
-        (click)="selectButton(button)"
-      >
-        {{ button }}
-      </button>
-</div>
-
-    <div class="news-container" *ngIf="newsData && newsData.length > 0 && this.selectedButton == 'News'" >
-      <div class="news-list-wrap" *ngFor="let news of newsData | reverse let i = index" [ngClass]="{'news-background': news.toggled}">
-        <!-- <div *ngIf="i !== 0" class="info-item"> -->
-
-        <div class="news-element" >
-             <div class="news-content-wrap">
-          <p class="news-title">{{ news.title | capitalize : "sentenceCase"}}</p>
-
-       <div class="news-description" [@collapse]="news.collapsed">
-          <p *ngIf="news.toggled">{{ news.description }}</p>
-        </div>
-          </div>
-          <div class="icons-wrap">
-            <div class="active-banner" (click)="onNewsDeactivated(news.id)" *ngIf="news.active && !news.toggled">active</div>
-            <div class="inactive-banner" (click)="onNewsActivated(news.id)" *ngIf="!news.active && !news.toggled">inactive</div>
-            <svg class="icon icon-edit" (click)="openEditForm()" *ngIf="!news.toggled" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M4.5 8.5l-.354-.354L4 8.293V8.5h.5zm4-4l.354-.354a.5.5 0 00-.708 0L8.5 4.5zm2 2l.354.354a.5.5 0 000-.708L10.5 6.5zm-4 4v.5h.207l.147-.146L6.5 10.5zm-2 0H4a.5.5 0 00.5.5v-.5zm3 3.5A6.5 6.5 0 011 7.5H0A7.5 7.5 0 007.5 15v-1zM14 7.5A6.5 6.5 0 017.5 14v1A7.5 7.5 0 0015 7.5h-1zM7.5 1A6.5 6.5 0 0114 7.5h1A7.5 7.5 0 007.5 0v1zm0-1A7.5 7.5 0 000 7.5h1A6.5 6.5 0 017.5 1V0zM4.854 8.854l4-4-.708-.708-4 4 .708.708zm3.292-4l2 2 .708-.708-2-2-.708.708zm2 1.292l-4 4 .708.708 4-4-.708-.708zM6.5 10h-2v1h2v-1zm-1.5.5v-2H4v2h1z" fill="#00AF8B"></path></svg>
-            <svg class="icon icon-bin" (click)="onNewsDelete(news.id)" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15" *ngIf="!news.toggled"><path d="M4.5 3V1.5a1 1 0 011-1h4a1 1 0 011 1V3M0 3.5h15m-13.5 0v10a1 1 0 001 1h10a1 1 0 001-1v-10M7.5 7v5m-3-3v3m6-3v3" stroke="#cb8a80"></path></svg>
-            <svg class="icon" (click)="onNewsFavouriteAction(news.description, news.title, news.illustration, news.active, news.id, $event, news.favourite)" [ngStyle]="{'fill': news.favourite ? '#ffb876' : 'none', 'stroke': news.favourite ? '#996e47' : '#666666'}" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18" *ngIf="!news.toggled"><path d="M7.5 12.04l-4.326 2.275L4 9.497.5 6.086l4.837-.703L7.5 1l2.163 4.383 4.837.703L11 9.497l.826 4.818L7.5 12.041z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-          <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16" (click)="toggleIcon(news)" *ngIf="!news.toggled"><path d="M14 5l-6.5 7L1 5" stroke="#086adb" stroke-linecap="square"
-            ></path></svg>
-          <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16"  (click)="toggleIcon(news)" *ngIf="news.toggled"><path d="M1 10l6.5-7 6.5 7" stroke="#086adb" stroke-linecap="square"
-           ></path></svg>
-</div>
-          </div>
-      <!-- </div> -->
-      </div>
+  <h1>History</h1>
+  <!-- <div class="item">
+    <button (click)="visible = !visible">Show animation</button>
+    <div [ngxCollapseAnimated]="visible">
+      Look, it works!
+    </div>
+  </div> -->
+  <div class="buttons-wrap">
+    <button *ngFor="let button of buttons" [ngClass]="{ selected: selectedButton === button }"
+      (click)="selectButton(button)">
+      {{ button }}
+    </button>
   </div>
 
-  <div class="events-container" *ngIf="eventsData && eventsData.length > 0 && this.selectedButton == 'Events'" >
-    <div class="events-list-wrap" *ngFor="let event of eventsData | reverse let i = index" [ngClass]="{'news-background': event.toggled}">
+  <div class="news-container" *ngIf="newsData && newsData.length > 0 && this.selectedButton == 'News'">
+    <div class="news-list-wrap" *ngFor="let news of newsData | reverse; let i = index"
+      [ngClass]="{ 'news-background': news.toggled }">
+      <!-- <div *ngIf="i !== 0" class="info-item"> -->
 
-      <div class="events-element" >
-           <div class="events-content-wrap">
-        <p class="event-title">{{ event.title | capitalize : "sentenceCase"}}</p>
-        <p class="event-time">{{ event.time }}</p>
-        <p class="event-time">{{event.event_date | date : "MMMM d" }}</p>
+      <form class="edit-container" (ngSubmit)="saveNewsEditForm(news.id)" *ngIf="editNewsId === news.id"
+        [formGroup]="editNewsForm">
+        <input type="text" formControlName="title" name="title" id="title" />
+        <textarea formControlName="description" name="description" id="description"></textarea>
+        <div class="edit-btn">
+          <!-- <button (click)="saveEditForm(news.id, )" type="submit">Save</button>  [(ngModel)]="news.description" -->
+          <button type="submit">Save</button>
+          <button (click)="cancelNewsEditForm()">Cancel</button>
         </div>
-        <div class="icons-wrap">
-          <div class="active-banner" (click)="onEventDeactivated(event.id)" *ngIf="event.active && !event.toggled">active</div>
-          <div class="inactive-banner" (click)="onEventActivated(event.id)" *ngIf="!event.active && !event.toggled">inactive</div>
-          <svg class="icon icon-bin" (click)="onEventDelete(event.id)" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15" *ngIf="!event.toggled"><path d="M4.5 3V1.5a1 1 0 011-1h4a1 1 0 011 1V3M0 3.5h15m-13.5 0v10a1 1 0 001 1h10a1 1 0 001-1v-10M7.5 7v5m-3-3v3m6-3v3" stroke="#cb8a80"></path></svg>
-          <svg class="icon" (click)="onEventsFavouriteAction(event.title, event.event_date, event.time, event.illustration, event.active, event.favourite, event.id)" [ngStyle]="{'fill': event.favourite ? '#ffb876' : 'none', 'stroke': event.favourite ? '#996e47' : '#666666'}" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18" *ngIf="!event.toggled"><path d="M7.5 12.04l-4.326 2.275L4 9.497.5 6.086l4.837-.703L7.5 1l2.163 4.383 4.837.703L11 9.497l.826 4.818L7.5 12.041z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-</div>
+      </form>
+
+      <div class="news-element">
+        <div class="news-content-wrap">
+          <p class="news-title" *ngIf="editNewsId !== news.id">
+            {{ news.title | capitalize : "sentenceCase" }}
+          </p>
+          <!-- [@collapse]="news.collapsed" -->
+          <!-- *ngIf="news.toggled" -->
+          <div class="news-description" [ngxCollapseAnimated]="visible" >
+            <p *ngIf="news.toggled" >{{ news.description }}</p>
+          </div>
         </div>
+        <div class="icons-wrap" *ngIf="editNewsId !== news.id">
+          <div class="active-banner" (click)="onNewsDeactivated(news.id)" *ngIf="news.active && !news.toggled">
+            active
+          </div>
+          <div class="inactive-banner" (click)="onNewsActivated(news.id)" *ngIf="!news.active && !news.toggled">
+            inactive
+          </div>
+          <svg class="icon icon-edit" (click)="openNewsEditForm(news)" *ngIf="!news.toggled && editNewsId !== news.id"
+            viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+            <path
+              d="M4.5 8.5l-.354-.354L4 8.293V8.5h.5zm4-4l.354-.354a.5.5 0 00-.708 0L8.5 4.5zm2 2l.354.354a.5.5 0 000-.708L10.5 6.5zm-4 4v.5h.207l.147-.146L6.5 10.5zm-2 0H4a.5.5 0 00.5.5v-.5zm3 3.5A6.5 6.5 0 011 7.5H0A7.5 7.5 0 007.5 15v-1zM14 7.5A6.5 6.5 0 017.5 14v1A7.5 7.5 0 0015 7.5h-1zM7.5 1A6.5 6.5 0 0114 7.5h1A7.5 7.5 0 007.5 0v1zm0-1A7.5 7.5 0 000 7.5h1A6.5 6.5 0 017.5 1V0zM4.854 8.854l4-4-.708-.708-4 4 .708.708zm3.292-4l2 2 .708-.708-2-2-.708.708zm2 1.292l-4 4 .708.708 4-4-.708-.708zM6.5 10h-2v1h2v-1zm-1.5.5v-2H4v2h1z"
+              fill="#00AF8B"></path>
+          </svg>
+          <svg class="icon icon-bin" (click)="onNewsDelete(news.id)" viewBox="0 0 15 15" fill="none"
+            xmlns="http://www.w3.org/2000/svg" width="15" height="15" *ngIf="!news.toggled">
+            <path
+              d="M4.5 3V1.5a1 1 0 011-1h4a1 1 0 011 1V3M0 3.5h15m-13.5 0v10a1 1 0 001 1h10a1 1 0 001-1v-10M7.5 7v5m-3-3v3m6-3v3"
+              stroke="#cb8a80"></path>
+          </svg>
+          <svg class="icon" (click)="
+              onNewsFavouriteAction(
+                news.description,
+                news.title,
+                news.illustration,
+                news.active,
+                news.id,
+                $event,
+                news.favourite
+              )
+            " [ngStyle]="{
+              fill: news.favourite ? '#ffb876' : 'none',
+              stroke: news.favourite ? '#996e47' : '#666666'
+            }" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+            *ngIf="!news.toggled">
+            <path
+              d="M7.5 12.04l-4.326 2.275L4 9.497.5 6.086l4.837-.703L7.5 1l2.163 4.383 4.837.703L11 9.497l.826 4.818L7.5 12.041z"
+              stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <svg class="arrow-icon " viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16"
+            height="16" (click)="toggleIcon(news)"  *ngIf="!news.toggled">
+            <path d="M14 5l-6.5 7L1 5" stroke="#086adb" stroke-linecap="square"></path>
+          </svg>
+          <svg class="arrow-icon arrow-icon-opened" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16"
+            height="16"   (click)="toggleIcon(news)"  *ngIf="news.toggled">
+            <path d="M1 10l6.5-7 6.5 7" stroke="#086adb" stroke-linecap="square"></path>
+          </svg>
+        </div>
+      </div>
+      <!-- (click)="toggleIcon(news)" -->
+      <!-- </div> -->
     </div>
-</div>
+  </div>
 
+  <div class="events-container" *ngIf="
+      eventsData && eventsData.length > 0 && this.selectedButton == 'Events'
+    ">
+    <div class="events-list-wrap" *ngFor="let event of eventsData | reverse; let i = index"
+      [ngClass]="{ 'news-background': event.toggled }">
 
-  <div class="important-container" *ngIf="importantData && importantData.length > 0 && this.selectedButton == 'Important'" >
-    <div class="important-list-wrap" *ngFor="let important of importantData | reverse let i = index" [ngClass]="{'news-background': important.toggled}">
+      <form class="edit-container" (ngSubmit)="saveEventEditForm(event.id)" *ngIf="editEventId === event.id"
+        [formGroup]="editEventsForm">
+        <input type="text" formControlName="title" name="title" id="title">
+        <input type="text" formControlName="event_date" name="event_date" id="event_date" />
+        <input type="text" formControlName="time" name="time" id="time" />
+        <div class="edit-btn">
+          <button type="submit">Save</button>
+          <button (click)="cancelEventEditForm()">Cancel</button>
+        </div>
+      </form>
 
-          <div class="important-content-wrap">
-
-        <p>{{ important.description | capitalize : "sentenceCase"}}</p>
-<div class="action-wrap">
-       <div class="active-banner" (click)="onImportantDeactivated(important.id)" *ngIf="important.active && i === 0">active</div>
-       <div class="inactive-banner" (click)="onImportantActivated(important.id)" *ngIf="!important.active && i === 0">inactive</div>
-       <svg class="icon icon-bin" (click)="onImportantDelete(important.id)" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15" ><path d="M4.5 3V1.5a1 1 0 011-1h4a1 1 0 011 1V3M0 3.5h15m-13.5 0v10a1 1 0 001 1h10a1 1 0 001-1v-10M7.5 7v5m-3-3v3m6-3v3" stroke="#cb8a80"></path></svg>
-       <svg class="icon" (click)="important.favourite ? onFavouriteImportantDelete(important.id) : onImportantFavourited(important.description, important.id)" [ngStyle]="{'fill': important.favourite ? '#FFC380' : 'none', 'stroke': important.favourite ? '#996e47' : '#666666'}" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M7.5 12.04l-4.326 2.275L4 9.497.5 6.086l4.837-.703L7.5 1l2.163 4.383 4.837.703L11 9.497l.826 4.818L7.5 12.041z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-        </div> 
-</div>
-        <div>
-</div>
+      <div class="events-element">
+        <div class="events-content-wrap" *ngIf="editEventId !== event.id">
+          <p class="event-title">
+            {{ event.title | capitalize : "sentenceCase" }}
+          </p>
+          <p class="event-time">{{ event.time }}</p>
+          <p class="event-time">{{ event.event_date | date : "MMM d" }}</p>
+        </div>
+        <div class="icons-wrap events-icons-wrap" *ngIf="editEventId !== event.id">
+          <div class="active-banner" (click)="onEventDeactivated(event.id)" *ngIf="event.active && !event.toggled">
+            active
+          </div>
+          <div class="inactive-banner" (click)="onEventActivated(event.id)" *ngIf="!event.active && !event.toggled">
+            inactive
+          </div>
+          <svg class="icon icon-edit" (click)="openEventEditForm(event)" *ngIf="!event.toggled && editEventId !== event.id"
+          viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+          <path
+            d="M4.5 8.5l-.354-.354L4 8.293V8.5h.5zm4-4l.354-.354a.5.5 0 00-.708 0L8.5 4.5zm2 2l.354.354a.5.5 0 000-.708L10.5 6.5zm-4 4v.5h.207l.147-.146L6.5 10.5zm-2 0H4a.5.5 0 00.5.5v-.5zm3 3.5A6.5 6.5 0 011 7.5H0A7.5 7.5 0 007.5 15v-1zM14 7.5A6.5 6.5 0 017.5 14v1A7.5 7.5 0 0015 7.5h-1zM7.5 1A6.5 6.5 0 0114 7.5h1A7.5 7.5 0 007.5 0v1zm0-1A7.5 7.5 0 000 7.5h1A6.5 6.5 0 017.5 1V0zM4.854 8.854l4-4-.708-.708-4 4 .708.708zm3.292-4l2 2 .708-.708-2-2-.708.708zm2 1.292l-4 4 .708.708 4-4-.708-.708zM6.5 10h-2v1h2v-1zm-1.5.5v-2H4v2h1z"
+            fill="#00AF8B"></path>
+        </svg>
+          <svg class="icon icon-bin" (click)="onEventDelete(event.id)" viewBox="0 0 15 15" fill="none"
+            xmlns="http://www.w3.org/2000/svg" width="15" height="15" *ngIf="!event.toggled">
+            <path
+              d="M4.5 3V1.5a1 1 0 011-1h4a1 1 0 011 1V3M0 3.5h15m-13.5 0v10a1 1 0 001 1h10a1 1 0 001-1v-10M7.5 7v5m-3-3v3m6-3v3"
+              stroke="#cb8a80"></path>
+          </svg>
+          <svg class="icon" (click)="
+              onEventsFavouriteAction(
+                event.title,
+                event.event_date,
+                event.time,
+                event.illustration,
+                event.active,
+                event.favourite,
+                event.id
+              )
+            " [ngStyle]="{
+              fill: event.favourite ? '#ffb876' : 'none',
+              stroke: event.favourite ? '#996e47' : '#666666'
+            }" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+            *ngIf="!event.toggled">
+            <path
+              d="M7.5 12.04l-4.326 2.275L4 9.497.5 6.086l4.837-.703L7.5 1l2.163 4.383 4.837.703L11 9.497l.826 4.818L7.5 12.041z"
+              stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+
+  <div class="important-container" *ngIf="
+      importantData &&
+      importantData.length > 0 &&
+      this.selectedButton == 'Important'
+    ">
+    <div class="important-list-wrap" *ngFor="let important of importantData | reverse; let i = index"
+      [ngClass]="{ 'news-background': important.toggled }">
+
+      <form class="edit-container" (ngSubmit)="saveImportantEditForm(important.id)" *ngIf="editImportantId === important.id"
+        [formGroup]="editImportantForm">
+        <input type="text" formControlName="description" name="description" id="description">
+        <div class="edit-btn">
+          <button type="submit">Save</button>
+          <button (click)="cancelImportantEditForm()">Cancel</button>
+        </div>
+      </form>
+
+      <div class="important-content-wrap" *ngIf="editImportantId !== important.id">
+        <p>{{ important.description | capitalize : "sentenceCase" }}</p>
+        <div class="action-wrap">
+          <div class="active-banner" (click)="onImportantDeactivated(important.id)" *ngIf="important.active && i === 0">
+            active
+          </div>
+          <div class="inactive-banner" (click)="onImportantActivated(important.id)"
+            *ngIf="!important.active && i === 0">
+            inactive
+          </div>
+          <svg class="icon icon-edit" (click)="openImportantEditForm(important)" *ngIf="!important.toggled && editImportantId !== important.id"
+          viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+          <path
+            d="M4.5 8.5l-.354-.354L4 8.293V8.5h.5zm4-4l.354-.354a.5.5 0 00-.708 0L8.5 4.5zm2 2l.354.354a.5.5 0 000-.708L10.5 6.5zm-4 4v.5h.207l.147-.146L6.5 10.5zm-2 0H4a.5.5 0 00.5.5v-.5zm3 3.5A6.5 6.5 0 011 7.5H0A7.5 7.5 0 007.5 15v-1zM14 7.5A6.5 6.5 0 017.5 14v1A7.5 7.5 0 0015 7.5h-1zM7.5 1A6.5 6.5 0 0114 7.5h1A7.5 7.5 0 007.5 0v1zm0-1A7.5 7.5 0 000 7.5h1A6.5 6.5 0 017.5 1V0zM4.854 8.854l4-4-.708-.708-4 4 .708.708zm3.292-4l2 2 .708-.708-2-2-.708.708zm2 1.292l-4 4 .708.708 4-4-.708-.708zM6.5 10h-2v1h2v-1zm-1.5.5v-2H4v2h1z"
+            fill="#00AF8B"></path>
+        </svg>
+          <svg class="icon icon-bin" (click)="onImportantDelete(important.id)" viewBox="0 0 15 15" fill="none"
+            xmlns="http://www.w3.org/2000/svg" width="15" height="15">
+            <path
+              d="M4.5 3V1.5a1 1 0 011-1h4a1 1 0 011 1V3M0 3.5h15m-13.5 0v10a1 1 0 001 1h10a1 1 0 001-1v-10M7.5 7v5m-3-3v3m6-3v3"
+              stroke="#cb8a80"></path>
+          </svg>
+          <svg class="icon" (click)="
+              important.favourite
+                ? onFavouriteImportantDelete(important.id)
+                : onImportantFavourited(important.description, important.id)
+            " [ngStyle]="{
+              fill: important.favourite ? '#FFC380' : 'none',
+              stroke: important.favourite ? '#996e47' : '#666666'
+            }" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+            <path
+              d="M7.5 12.04l-4.326 2.275L4 9.497.5 6.086l4.837-.703L7.5 1l2.163 4.383 4.837.703L11 9.497l.826 4.818L7.5 12.041z"
+              stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+      </div>
+      <div></div>
+    </div>
+  </div>
 </div>
