@@ -18,6 +18,9 @@
         </div>
       </div>
     </div>
+    <div class="point-slider">
+      <div *ngFor="let item of dataNewsFilteredObject; let i = index" class="dot" [class.active]="i === activeIndex"></div>
+    </div>
   </div>
   <!-- <div class="news-info-container">
 
@@ -63,10 +66,6 @@
     </div>
   </div>
 </div>
-
-<!-- <div class="point-slider">
-  <div *ngFor="let item of dataService.dataNewsObject; let i = index" class="dot" [class.active]="i === activeIndex"></div>
-</div> -->
 
   <div class="important-info-container" *ngIf="this.importantService.dataImportantFilteredObject && this.importantService.dataImportantFilteredObject.length > 0">
       <marquee class="marquee" direction="left" scrolldelay="80" behavior="loop">{{ this.importantService.dataImportantFilteredObject[this.importantService.dataImportantFilteredObject.length - 1].description}} {{ this.importantService.dataImportantFilteredObject[this.importantService.dataImportantFilteredObject.length - 1].description}} {{ this.importantService.dataImportantFilteredObject[this.importantService.dataImportantFilteredObject.length - 1].description}}</marquee>
