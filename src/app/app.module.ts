@@ -26,6 +26,7 @@ import { LoginComponent } from './login/login.component';
 import { TokenInterceptor } from './interceptor/token.interceptor';
 import { NgxCollapseAnimatedDirective } from 'ngx-collapse-animated';
 import { SharedConfettiComponent } from './shared-confetti/shared-confetti.component';
+import { HammerModule } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { SharedConfettiComponent } from './shared-confetti/shared-confetti.compo
     ReversePipe,
     SentenceCasePipe,
     NgxCollapseAnimatedDirective,
-    RouterOutlet
+    RouterOutlet,
+    HammerModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

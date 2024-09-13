@@ -14,7 +14,6 @@ import { timer } from 'rxjs';
 import { EventsService } from '../_service/events.service';
 import { trigger, transition, style, animate, group } from '@angular/animations';
 import { ConfettiService } from '../_service/confetti.service';
-import confetti from 'canvas-confetti';
 
 @Component({
   selector: 'app-screen-view',
@@ -87,13 +86,13 @@ export class ScreenViewComponent implements OnInit, OnDestroy{
     this.startAutoSlide();
     this.loadEvents();
 
-    this.confettiService.confettiTriggered$.subscribe(() => {
-      console.log('Confetti triggered in ScreenViewComponent');
-    });
+    // this.confettiService.confettiTriggered$.subscribe(() => {
+    //   console.log('Confetti triggered in ScreenViewComponent');
+    // });
     // const source = interval(1000);
     // const subscribe = source.subscribe(val => console.log(val));
     // console.log(subscribe + "timer timer");
-    
+
     this.newsService.news$.subscribe(news => {
       this.dataNewsFilteredObject = news;
     });
@@ -156,6 +155,30 @@ export class ScreenViewComponent implements OnInit, OnDestroy{
           this.isContentVisible = true;
         }, 600); 
       }, 50000); 
+  }
+
+  onIconLeft() {
+    if (this.activeIndex < this.dataNewsFilteredObject.length - 1) {
+      this.activeIndex++;
+    }
+  }
+  
+  onIconRight() {
+    if (this.activeIndex > 0) {
+      this.activeIndex--;
+    }
+  }
+
+  onSwipeLeft() {
+    if (this.activeIndex < this.dataNewsFilteredObject.length - 1) {
+      this.activeIndex++;
+    }
+  }
+  
+  onSwipeRight() {
+    if (this.activeIndex > 0) {
+      this.activeIndex--;
+    }
   }
 
   // ngAfterViewInit(): void {

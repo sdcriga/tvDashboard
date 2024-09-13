@@ -4,7 +4,9 @@
 <div class="screen-view-container">
 <div class="news-events-wrap">
 
-  <div class="news-info-container">
+  <div class="news-info-container" (swipeleft)="onSwipeLeft()" (swiperight)="onSwipeRight()">
+    <button class="left-arrow" (click)="onSwipeRight()"><svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="15"><path d="M8.5 4.5l-3 3 3 3" stroke="#11AAFF" stroke-linecap="square"></path></svg></button>
+    <button class="right-arrow" (click)="onSwipeLeft()"><svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="15"><path d="M6.5 10.5l3-3-3-3" stroke="#11AAFF" stroke-linecap="square"></path></svg></button>
     <div class="news-title">
       <h1 class="news-title">News</h1>   
       <h1 class="date-title">{{date | date: "EEEE, MMMM d, y"}}</h1> 
@@ -22,23 +24,6 @@
       <div *ngFor="let item of dataNewsFilteredObject; let i = index" class="dot" [class.active]="i === activeIndex"></div>
     </div>
   </div>
-  <!-- <div class="news-info-container">
-
-    <div class="news-title">
-  <h1 class="news-title">News</h1>   
-  <h1 class="date-title">{{date | date: "EEEE, MMMM d, y"}}</h1> 
-    </div>
-    <div *ngIf="this.newsService.dataNewsFilteredObject && this.newsService.dataNewsFilteredObject.length > 0">
-    <div class="points-wrap" *ngIf="isContentVisible" @fadeSlide>
-    <div class="news-content-wrap"  >
-      <img *ngIf="this.newsService.dataNewsFilteredObject[activeIndex]" class="news-img" src="{{this.newsService.dataNewsFilteredObject[activeIndex].illustration}}" alt="">
-      <h1 *ngIf="this.newsService.dataNewsFilteredObject[activeIndex]">{{this.newsService.dataNewsFilteredObject[activeIndex].title | capitalize : "sentenceCase"}}</h1>
-      <p *ngIf="this.newsService.dataNewsFilteredObject[activeIndex]">{{this.newsService.dataNewsFilteredObject[activeIndex].description}}</p>
-      </div>
-      </div>
-      </div>
-  </div> -->
-
     
   <div class="events-title-wrap">
     <h1 class="event-title">Next events</h1>

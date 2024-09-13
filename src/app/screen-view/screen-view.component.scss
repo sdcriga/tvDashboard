@@ -94,6 +94,7 @@
         color: white;
         font-family: SwissFontTwo;
         font-size: 3rem;
+         padding-left: 1.8rem;
       }
       .event-info-container {
         // box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
@@ -187,6 +188,10 @@
   background-color: #11AAFF;
 }
 
+.left-arrow, .right-arrow {
+  display: none;
+}
+
 @media only screen and (max-width: 435px) {
   .background-color{
     height: 100vh !important;
@@ -196,6 +201,31 @@
   }
   .news-info-container {
     padding-right: 0 !important;
+    .background-color {
+      height: 100vh !important;
+    }
+    .left-arrow, .right-arrow {
+      display: flex;
+      position: absolute;
+      top: 26%;
+      transform: translateY(-50%);
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    .left-arrow {
+      left: 7%;
+    }
+    .right-arrow {
+      right: 7%;
+    }
+  
+    .left-arrow svg, .right-arrow svg {
+      width: 18px;
+      height: 18px;
+    }
   }
   .news-events-wrap {
     display: grid;
@@ -227,7 +257,7 @@
     h1{
       font-family: SwissFontTwo;
       font-size: 20px !important;
-      padding: 0 0 !important;
+      padding: 0 0 0.8rem 0 !important;
       margin: 0 !important;
     }
     p{
@@ -279,9 +309,6 @@
     }
   }
 }
-
-// @media only screen and (max-width: 0px) {
-// }
 
 
 // .calendar {

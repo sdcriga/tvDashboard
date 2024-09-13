@@ -9,8 +9,8 @@ import { FavouriteImportant } from '../_interface/favourite-important';
   providedIn: 'root'
 })
 export class ImportantService {
-     private readonly server: string = 'http://officescreen.local:8080';
-//  private readonly server: string = 'http://localhost:8080';
+    //  private readonly server: string = 'http://officescreen.local:8080';
+ private readonly server: string = 'http://localhost:8080';
 
  dataObject: Important[] | null = null;
  dataImportantFilteredObject: Important[] | null = null;
