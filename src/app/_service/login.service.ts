@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, tap, catchError, throwError } from 'rxjs';
@@ -22,9 +22,16 @@ export class LoginService {
 
   login$ = (username: string, password: string) =>
   <Observable<CustomHttpResponse<Profile>>>this.http
-    .post<CustomHttpResponse<Profile>>(`${this.server}/api/login`, {
-  username, password,
-    })
+  .post<CustomHttpResponse<Profile>>(
+    `${this.server}/api/login`, 
+    { username, password }, 
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      })
+    }
+  )
     .pipe(tap(console.log), catchError(this.handleError));
 
     profile$ = () =>
@@ -35,11 +42,12 @@ export class LoginService {
     );
 
     refreshToken$ = () => <Observable<CustomHttpResponse<Profile>>>this.http
-      .get<CustomHttpResponse<Profile>>(`${this.server}/api/refresh/token`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem(Key.REFRESH_TOKEN)}`,
-        },
-      })
+    .get<CustomHttpResponse<Profile>>(`${this.server}/api/refresh/token`, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${localStorage.getItem(Key.REFRESH_TOKEN)}`,
+        'Accept': 'application/json'
+      }),
+    })
       .pipe(
         tap((response) => {
           console.log(response);
