@@ -1,4 +1,7 @@
-<div class="extra-container">
+<div class="extra-container" [ngClass]="{ 'dark-background': isDarkBackground }">
     <h1>Extra</h1>
+    <div class="btn-wrap">
     <button (click)="celebrate()">Celebrate!</button>
+    <button (click)="triggerSnow()">Snow</button>
+    </div>
 </div>

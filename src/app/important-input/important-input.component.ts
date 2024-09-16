@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { DataSaveService } from '../_service/data-save.service';
 import { Important } from '../_interface/important';
@@ -17,6 +17,8 @@ export class ImportantInputComponent implements OnInit {
   emptyDescriptionErrorMessage: string = "";
   editMode: boolean = false;
   isButtonExpanded = false;
+  formSubmittedSuccessfully = false;
+  showSuccessMessage = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,9 +41,19 @@ export class ImportantInputComponent implements OnInit {
     this.importantService.newImportant$(belowInfo).subscribe({
       next: (response) => {
         console.log('Important created successfully:', response);
+        this.showSuccessMessage = true;
+        this.formSubmittedSuccessfully = true; 
+        this.importantInputForm.reset(); 
+        setTimeout(() => {
+          this.formSubmittedSuccessfully = false;
+        }, 2000); 
+        setTimeout(() => {
+          this.showSuccessMessage = false; 
+        }, 5000); 
       },
       error: (error) => {
         console.error('Failed to create Important:', error);
+        this.formSubmittedSuccessfully = false;
       }
     });
   }

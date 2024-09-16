@@ -7,4 +7,6 @@ export interface FavouriteEvents {
     illustration: string | null;
     favourite: boolean | null;
     active: boolean | null;
+    showSuccess?: boolean;
+    fadeOut?: boolean;
   }

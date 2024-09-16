@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { inject, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NewsInputComponent } from './news-input/news-input.component';
 import { EventInputComponent } from './event-input/event-input.component';
@@ -7,6 +7,7 @@ import { ScreenViewComponent } from './screen-view/screen-view.component';
 import { NewScreenViewComponent } from './new-screen-view/new-screen-view.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
+import { AuthenticationGuard } from './guard/authentication.guard';
 
 const routes: Routes = [
   { path: '', component: ScreenViewComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthenticationGuard],
   },
   {
     path: 'news',

@@ -11,7 +11,7 @@
 </div>
 
     <div class="news-container" *ngIf="newsFavouriteData && newsFavouriteData.length > 0 && this.selectedButton == 'News'" >
-      <div class="news-list-wrap" *ngFor="let news of newsFavouriteData | reverse let i = index" [ngClass]="{'news-background': news.toggled}">
+      <div class="news-list-wrap" *ngFor="let news of favouriteNewsItems | reverse let i = index" [ngClass]="{'news-background': news.toggled}">
         <!-- <div *ngIf="i !== 0" class="info-item"> -->
 
         <div class="news-element" >
@@ -23,6 +23,9 @@
         </div>
           </div>
           <div class="icons-wrap">
+            <div *ngIf="news.showSuccess" class="success-message" [class.fade-out]="news.fadeOut">
+              Submitted!
+            </div>
             <svg (click)="onSubmitNews(news)" class="icon icon-plus" *ngIf="!news.toggled" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M7.5 1.5l3.25 3m-3.25-3l-3 3m3-3V11m6-4v6.5h-12V7" stroke="#008E00"></path></svg>
             <svg class="icon icon-bin" (click)="onNewsDelete(news.newsId)" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15" *ngIf="!news.toggled"><path d="M4.5 3V1.5a1 1 0 011-1h4a1 1 0 011 1V3M0 3.5h15m-13.5 0v10a1 1 0 001 1h10a1 1 0 001-1v-10M7.5 7v5m-3-3v3m6-3v3" stroke="#cb8a80"></path></svg>
             <svg class="arrow-icon" (click)="toggleIcon(news)"  *ngIf="!news.toggled" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16" (click)="toggleIcon(news)"><path d="M14 5l-6.5 7L1 5" stroke="#086adb" stroke-linecap="square"
@@ -37,12 +40,15 @@
 
 
   <div class="events-container" *ngIf="eventsFavouriteData && eventsFavouriteData.length > 0 && this.selectedButton == 'Events'" >
-    <div class="event-list-wrap" *ngFor="let event of eventsFavouriteData | reverse let i = index" [ngClass]="{'news-background': event.toggled}">
+    <div class="event-list-wrap" *ngFor="let event of favouriteEventsItems | reverse let i = index" [ngClass]="{'news-background': event.toggled}">
       <div class="event-element" >
            <div class="event-content-wrap">
         <p class="event-title">{{ event.title | capitalize : "sentenceCase"}}</p>
         </div>
         <div class="icons-wrap">
+          <div *ngIf="event.showSuccess" class="success-message" [class.fade-out]="event.fadeOut">
+            Submitted!
+          </div>
           <svg class="icon icon-plus" (click)="onSubmitEvent(event)" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M7.5 1.5l3.25 3m-3.25-3l-3 3m3-3V11m6-4v6.5h-12V7" stroke="#008E00"></path></svg>
           <svg class="icon icon-bin" (click)="onEventDelete(event.eventId)" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15" *ngIf="!event.toggled"><path d="M4.5 3V1.5a1 1 0 011-1h4a1 1 0 011 1V3M0 3.5h15m-13.5 0v10a1 1 0 001 1h10a1 1 0 001-1v-10M7.5 7v5m-3-3v3m6-3v3" stroke="#cb8a80"></path></svg>
 </div>
@@ -52,12 +58,15 @@
 
 
   <div class="important-container" *ngIf="importantFavouriteData && importantFavouriteData.length > 0 && this.selectedButton == 'Important'" >
-    <div class="important-list-wrap" *ngFor="let important of importantFavouriteData | reverse let i = index" [ngClass]="{'news-background': important.toggled}">
+    <div class="important-list-wrap" *ngFor="let important of favouriteImportantItems | reverse let i = index" [ngClass]="{'news-background': important.toggled}">
 
           <div class="important-content-wrap">
 
         <p>{{ important.description | capitalize : "sentenceCase"}}</p>
 <div class="action-wrap">
+  <div *ngIf="important.showSuccess" class="success-message" [class.fade-out]="important.fadeOut">
+    Submitted!
+  </div>
   <svg class="icon icon-plus" (click)="onSubmitImportant(important)" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M7.5 1.5l3.25 3m-3.25-3l-3 3m3-3V11m6-4v6.5h-12V7" stroke="#008E00"></path></svg>
 
     <svg class="icon icon-bin" (click)="onImportantDelete(important.importantId)" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15" *ngIf="!important.toggled"><path d="M4.5 3V1.5a1 1 0 011-1h4a1 1 0 011 1V3M0 3.5h15m-13.5 0v10a1 1 0 001 1h10a1 1 0 001-1v-10M7.5 7v5m-3-3v3m6-3v3" stroke="#cb8a80"></path></svg>

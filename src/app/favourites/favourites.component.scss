@@ -62,7 +62,6 @@
           .news-description {
             p {
               font-family: SwissFont;
-    
               color: #333333;
             }
           }
@@ -184,6 +183,15 @@ svg {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.success-message{
+  color:  #9ec5ab;
+  opacity: 1;
+  transition: opacity 0.7s ease-in-out;
+}
+.fade-out {
+  opacity: 0; 
 }
 
 @media only screen and (max-width: 400px) {

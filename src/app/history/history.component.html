@@ -14,7 +14,7 @@
   </div>
 
   <div class="news-container" *ngIf="newsData && newsData.length > 0 && this.selectedButton == 'News'">
-    <div class="news-list-wrap" *ngFor="let news of newsData | reverse; let i = index"
+    <div class="news-list-wrap" *ngFor="let news of newsItems | reverse; let i = index"
       [ngClass]="{ 'news-background': news.toggled }">
       <!-- <div *ngIf="i !== 0" class="info-item"> -->
 
@@ -96,7 +96,7 @@
   <div class="events-container" *ngIf="
       eventsData && eventsData.length > 0 && this.selectedButton == 'Events'
     ">
-    <div class="events-list-wrap" *ngFor="let event of eventsData | reverse; let i = index"
+    <div class="events-list-wrap" *ngFor="let event of eventsItems | reverse; let i = index"
       [ngClass]="{ 'news-background': event.toggled }">
 
       <form class="edit-container" (ngSubmit)="saveEventEditForm(event.id)" *ngIf="editEventId === event.id"
@@ -166,7 +166,7 @@
       importantData.length > 0 &&
       this.selectedButton == 'Important'
     ">
-    <div class="important-list-wrap" *ngFor="let important of importantData | reverse; let i = index"
+    <div class="important-list-wrap" *ngFor="let important of importantItems | reverse; let i = index"
       [ngClass]="{ 'news-background': important.toggled }">
 
       <form class="edit-container" (ngSubmit)="saveImportantEditForm(important.id)" *ngIf="editImportantId === important.id"

@@ -8,4 +8,6 @@ export interface FavouriteNews {
     active: boolean | null;
     toggled?: boolean;
     collapsed?: boolean;
+    showSuccess?: boolean;
+  fadeOut?: boolean;
   }

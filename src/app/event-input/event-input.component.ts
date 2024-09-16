@@ -16,6 +16,8 @@ export class EventInputComponent implements OnInit {
   image: any;
   file: File | null = null;
   submittedForms: any[] = [];
+  formSubmittedSuccessfully = false;
+  showSuccessMessage = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,9 +41,19 @@ export class EventInputComponent implements OnInit {
     this.dataService.newEvent$(event).subscribe({
       next: (response) => {
         console.log('Event created successfully:', response);
+        this.showSuccessMessage = true;
+        this.formSubmittedSuccessfully = true; 
+        this.eventInputForm.reset(); 
+        setTimeout(() => {
+          this.formSubmittedSuccessfully = false;
+        }, 2000); 
+        setTimeout(() => {
+          this.showSuccessMessage = false; 
+        }, 5000); 
       },
       error: (error) => {
         console.error('Failed to create Event:', error);
+        this.formSubmittedSuccessfully = false;
       }
     });
   }

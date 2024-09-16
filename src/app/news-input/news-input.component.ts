@@ -13,6 +13,8 @@ export class NewsInputComponent implements OnInit {
   dataNewsObject: News | null = null;
   file: File | null = null;
   fileName = '';
+  formSubmittedSuccessfully = false;
+  showSuccessMessage = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,9 +37,19 @@ export class NewsInputComponent implements OnInit {
     this.newsService.newNews$(mainInfo).subscribe({
       next: (response) => {
         console.log('News created successfully:', response);
+        this.showSuccessMessage = true;
+        this.formSubmittedSuccessfully = true; 
+        this.newsInputForm.reset(); 
+        setTimeout(() => {
+          this.formSubmittedSuccessfully = false;
+        }, 2000); 
+        setTimeout(() => {
+          this.showSuccessMessage = false; 
+        }, 5000); 
       },
       error: (error) => {
         console.error('Failed to create news:', error);
+        this.formSubmittedSuccessfully = false;
       },
     });
   }

@@ -5,4 +5,6 @@ export interface FavouriteImportant {
     description: string | null;
     favourite: boolean | null;
     active: boolean | null;
+    showSuccess?: boolean;
+    fadeOut?: boolean;
   }

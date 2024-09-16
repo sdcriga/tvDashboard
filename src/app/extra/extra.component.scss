@@ -13,4 +13,21 @@
       font-size: 1.7rem;
       color: #333333;
     }
+    .btn-wrap{
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      button{
+        border: 0.8px solid #7F2879;
+        background-color:  #F8FAFB;
+        border-radius: 8px;
+        padding: 0.7rem;
+        cursor: pointer;
+      }
+    }
+}
+
+.dark-background {
+  background-color: rgba(142, 142, 142, 0.8); 
+  transition: background-color 0.5s ease; 
 }

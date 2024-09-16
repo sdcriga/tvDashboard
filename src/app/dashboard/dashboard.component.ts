@@ -30,7 +30,7 @@ export class DashboardComponent {
   isNewsInputVisible = false;
   isEventInputVisible = false;
   isImportantInputVisible = false;
-  isHistoryVisible = false;
+  isHistoryVisible = true;
   isFavouritesVisible = false;
   isImagesVisible = false;
   isExtraVisible = false;

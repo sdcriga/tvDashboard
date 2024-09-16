@@ -1,5 +1,8 @@
 <div class="news-container">
     <form (ngSubmit)="onSubmit()" [formGroup]="newsInputForm">
+      <div *ngIf="showSuccessMessage" class="success-message" [class.fade-out]="!formSubmittedSuccessfully">
+        News was added successfully!
+      </div>
       <input
         type="text"
         placeholder="Title"
@@ -57,7 +60,7 @@
         Illustration link is required
       </div>
     </div>
-      <button type="submit">Add</button>
+      <button type="submit" [disabled]="newsInputForm.invalid">Add</button>
     </form>
   </div>
 

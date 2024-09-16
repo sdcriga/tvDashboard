@@ -13,6 +13,14 @@
       width: 100%; 
       max-width: 600px; 
       margin: 0 auto; 
+      .success-message{
+        color:  #0D6F2C;
+        opacity: 1;
+        transition: opacity 0.7s ease-in-out;
+      }
+      .fade-out {
+        opacity: 0; 
+      }
       input {
         padding: 0.7rem;
       border: 1px solid #086ADB;
@@ -30,9 +38,30 @@
         box-sizing: border-box;
         transition: background-color 0.3s ease;
         cursor: pointer;
+        position: relative;
+        -webkit-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        transition: all 0.4s;
       }
       button:hover{
         background-color: #0048CF;
+      }
+      button:after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        -webkit-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        transition: all 0.4s;
+      }
+      button:active {
+        top: 1px;
+      }
+      button:disabled {
+        background-color: #DDE3E7; 
+        color:  #474747;           
+        // cursor: not-allowed;     
+        border: 1px solid #DDE3E7; 
       }
   }
 }
