@@ -11,7 +11,7 @@ import { Key } from 'src/enum/key.enum';
 })
 export class LoginService {
 
-  private readonly server: string = 'http://officescreen.local:8080';
+  private readonly server: string = 'http://officescreen.local';
 
   // private readonly server: string =
   // 'http://localhost:8080';
