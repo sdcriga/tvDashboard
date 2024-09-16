@@ -10,7 +10,7 @@ import { CustomHttpResponse } from '../_interface/customhttp';
 })
 export class NewsService {
 
-   private readonly server: string = 'http://officescreen.local';
+   private readonly server: string = 'http://officescreen.local:8080';
 //  private readonly server: string = 'http://localhost:8080';
  
  private newsSubject = new Subject<News[]>();

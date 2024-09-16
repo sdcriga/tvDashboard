@@ -11,7 +11,7 @@ import { Events } from '../_interface/events';
   providedIn: 'root',
 })
 export class DataSaveService {
- private readonly server: string = 'http://officescreen.local';
+ private readonly server: string = 'http://officescreen.local:8080';
 //  private readonly server: string = 'http://localhost:8080';
 
  dataObject: Important[] | null = null;
