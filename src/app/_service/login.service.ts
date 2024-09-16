@@ -35,11 +35,19 @@ export class LoginService {
     .pipe(tap(console.log), catchError(this.handleError));
 
     profile$ = () =>
-    <Observable<CustomHttpResponse<Profile>>>(
-      this.http
-        .get<CustomHttpResponse<Profile>>(`${this.server}/api/profile`)
-        .pipe(tap(console.log), catchError(this.handleError))
-    );
+      <Observable<CustomHttpResponse<Profile>>>(
+        this.http
+          .get<CustomHttpResponse<Profile>>(`${this.server}/api/profile`, {
+            headers: new HttpHeaders({
+              'Accept': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem(Key.TOKEN)}`
+            })
+          })
+          .pipe(
+            tap(console.log),
+            catchError(this.handleError)
+          )
+      );
 
     refreshToken$ = () => <Observable<CustomHttpResponse<Profile>>>this.http
     .get<CustomHttpResponse<Profile>>(`${this.server}/api/refresh/token`, {
