@@ -15,11 +15,13 @@ export class CopyLinkDirective {
       return;
     }
     if (navigator.clipboard && navigator.clipboard.writeText) {
+      console.log('Using modern clipboard API');
       // If the clipboard API is supported
       navigator.clipboard.writeText(this.copyText.toString())
         .then(() => this.showCopiedMessage())
         .catch(err => console.error('Failed to copy text: ', err));
     } else {
+      console.log('Using fallback method');
       // Fallback for environments where clipboard API is not supported
       this.copyToClipboardFallback(this.copyText.toString());
     }
